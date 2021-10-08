@@ -20,7 +20,7 @@ TODO
 
 # Desenvolvido por
 
-- [Ana Beatriz](https://github.com/anabcuelbas)
+- [Ana Cuelbas](https://github.com/anabcuelbas)
 - [Giovana Armani](https://github.com/gi-armani)
 - [Laura Zitelli](https://github.com/LauraZitelli)
 - [Vitória Lorentz](https://github.com/vitoriaglorentz)
