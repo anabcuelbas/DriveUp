@@ -1,4 +1,5 @@
 require('dotenv/config')
+const {remetente} = require('../mailer')
 const {Pool} = require('pg');
 
 const pool = new Pool({
@@ -42,6 +43,20 @@ const addReserva = async (req, res) => {
         }
     }); 
 
+    const emailToSend = {
+        from: process.env.MAILER_USER,
+        to: email,
+        subject: 'Agendamento confirmado!',
+        text: 'Olá, ' + nomeDono + '!\nSeu agendamento de ' + servico + ' está confirmado para o dia ' + data + ' às ' + horario,
+    };
+
+    remetente.sendMail(emailToSend, function(error) {
+        if (error) {
+            console.log(error);
+        } else {
+            console.log('Email enviado com sucesso.');
+        }
+    })
 }
 
 module.exports = {
