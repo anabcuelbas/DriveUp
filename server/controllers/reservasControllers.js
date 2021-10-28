@@ -22,16 +22,17 @@ const getReservas = async (req, res) => {
 
 const addReserva = async (req, res) => {
     let nomeDono = req.body.nomeDono;
-    let cpfDono = req.body.cpfDono;
+    let nascimentoDono = req.body.nascimentoDono;
     let telefone = req.body.telefone;
     let email = req.body.email;
+    let tipoVeiculo = req.body.tipoVeiculo;
     let servico = req.body.servico;
     let data = req.body.data;
     let horario = req.body.horario;
 
-    console.log(nomeDono + " " + cpfDono + " " + telefone + " " + email + " " + servico + " " + data + " " + horario)
+    console.log(nomeDono + " " + nascimentoDono + " " + telefone + " " + email + " " + tipoVeiculo + " " + servico + " " + data + " " + horario)
 
-    const query = "INSERT INTO reserva_servico (NomeDono, CpfDono, Telefone, Email, Servico, Data, Horario) VALUES ('" + nomeDono + "', '" + cpfDono + "', '" + telefone + "', '" + email + "', '" + servico + "', '" + data + "', '" + horario + "');"
+    const query = "INSERT INTO reserva_servico (NomeDono, NascimentoDono, Telefone, Email, TipoVeiculo, Servico, Data, Horario) VALUES ('" + nomeDono + "', '" + nascimentoDono + "', '" + telefone + "', '" + email + "', '" + tipoVeiculo + "', '" + servico + "', '" + data + "', '" + horario + "');"
 
     console.log(query)
     const response = await pool.query(query, async(err, result) => {
