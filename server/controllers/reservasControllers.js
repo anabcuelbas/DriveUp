@@ -30,11 +30,8 @@ const addReserva = async (req, res) => {
     let data = req.body.data;
     let horario = req.body.horario;
 
-    console.log(nomeDono + " " + cpfDono + " " + telefone + " " + email + " " + servico + " " + data + " " + horario)
-
     const query = "INSERT INTO reserva_servico (NomeDono, CpfDono, Telefone, Email, Servico, Data, Horario) VALUES ('" + nomeDono + "', '" + cpfDono + "', '" + telefone + "', '" + email + "', '" + servico + "', '" + data + "', '" + horario + "');"
 
-    console.log(query)
     const response = await pool.query(query, async(err, result) => {
         if(err) {
             console.log(err)
