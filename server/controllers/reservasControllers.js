@@ -1,4 +1,5 @@
 require('dotenv/config')
+const {remetente} = require('../mailer')
 const {Pool} = require('pg');
 
 const pool = new Pool({
@@ -30,11 +31,8 @@ const addReserva = async (req, res) => {
     let data = req.body.data;
     let horario = req.body.horario;
 
-    console.log(nomeDono + " " + nascimentoDono + " " + telefone + " " + email + " " + tipoVeiculo + " " + servico + " " + data + " " + horario)
-
     const query = "INSERT INTO reserva_servico (NomeDono, NascimentoDono, Telefone, Email, TipoVeiculo, Servico, Data, Horario) VALUES ('" + nomeDono + "', '" + nascimentoDono + "', '" + telefone + "', '" + email + "', '" + tipoVeiculo + "', '" + servico + "', '" + data + "', '" + horario + "');"
 
-    console.log(query)
     const response = await pool.query(query, async(err, result) => {
         if(err) {
             console.log(err)
@@ -43,6 +41,20 @@ const addReserva = async (req, res) => {
         }
     }); 
 
+    const emailToSend = {
+        from: process.env.MAILER_USER,
+        to: email,
+        subject: 'Agendamento confirmado!',
+        text: 'Olá, ' + nomeDono + '!\nSeu agendamento de ' + servico + ' está confirmado para o dia ' + data + ' às ' + horario,
+    };
+
+    remetente.sendMail(emailToSend, function(error) {
+        if (error) {
+            console.log(error);
+        } else {
+            console.log('Email enviado com sucesso.');
+        }
+    })
 }
 
 module.exports = {
