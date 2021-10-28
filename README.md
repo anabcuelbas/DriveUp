@@ -4,7 +4,9 @@ Este projeto foi desenvolvido para a disciplina Engenharia de Sistemas de Inform
 
 ## Descrição técnica da infra
 
-TODO
+- Linguagem: JavaScript
+- Frameworks: Angular
+- Plataformas: Node.js, Netlify (deploy do Frontend), Heroku (deploy do backend)
 
 ## Escolha das funções
 
