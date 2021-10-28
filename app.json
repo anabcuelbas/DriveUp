@@ -1,0 +1,48 @@
+{
+    "name": "Drive Up",
+    "description": "This app is a car services hub.",
+    "website": "https://driveup.netlify.app/",
+    "repository": "https://github.com/anabcuelbas/DriveUp",
+    "success_url": "/",
+    "env": {
+      "DB_HOST": {
+        "description": "Database host name.",
+        "generator": "secret"
+      },
+      "DB_USER": {
+        "description": "Database user name.",
+        "generator": "secret"
+      },
+      "DB_PASSWORD": {
+        "description": "Database password value.",
+        "generator": "secret"
+      },
+      "DB_DATABASE": {
+        "description": "Database name.",
+        "generator": "secret"
+      },
+      "MAILER_USER": {
+        "description": "Application email.",
+        "generator": "secret"
+      },
+      "MAILER_PASSWORD": {
+        "description": "Application email password.",
+        "generator": "secret"
+      }
+    },
+    "formation": {
+      "web": {
+        "quantity": 1,
+        "size": "standard-1x"
+      }
+    },
+    "image": "heroku/nodejs",
+    "buildpacks": [
+      {
+        "url": "https://github.com/heroku/heroku-buildpack-inline.git"
+      },
+      {
+        "url": "heroku/nodejs"
+      }
+    ]
+}
