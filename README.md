@@ -8,10 +8,6 @@ Este projeto foi desenvolvido para a disciplina Engenharia de Sistemas de Inform
 - **Frameworks:** Angular
 - **Plataformas:** Node.js, Netlify (deploy do Frontend), Heroku (deploy do Backend)
 
-## Escolha das funções
-
-TODO
-
 ## Configurações
 
 ### App
