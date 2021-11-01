@@ -1,0 +1,111 @@
+ion-content {
+  --background: #e5e5e5;
+}
+
+ion-toolbar {
+  --background: #ba3b46;
+  height: 80px;
+}
+
+ion-img {
+  width: 150px;
+}
+
+ion-card {
+  width: 1100px;
+  height: 650px;
+  box-shadow: 0px 8px 10px 1px #00000024;
+}
+
+.align-middle {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.header-text {
+  font-size: 20px;
+  color: #ffeedb;
+  font-family: "Montserrat", sans-serif;
+}
+
+.main-text {
+  font-size: 30px;
+  color: #000000;
+  font-family: "Montserrat", sans-serif;
+}
+
+.secondary-text {
+  font-size: 24px;
+  color: #000000;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 700;
+}
+
+.error {
+  opacity: 0;
+  color: red;
+  transition: all ease-in-out 0.5s;
+  font-size: 0.75rem;
+  &.show {
+    opacity: 1;
+  }
+}
+
+.simple-text {
+  font-size: 18px;
+  color: #000000;
+  font-family: "Montserrat", sans-serif;
+}
+
+.padding-start {
+  padding-top: 100px;
+  padding-left: 150px;
+}
+
+ion-input {
+  --background: #f9f9f9;
+  box-shadow: 5px 5px 5px 1px #00000024;
+  border-radius: 20px;
+  height: 45px;
+  font-size: 18px;
+  font-family: "Montserrat", sans-serif;
+}
+
+ion-select {
+  background: #f9f9f9;
+  box-shadow: 5px 5px 5px 1px #00000024;
+  border-radius: 20px;
+  height: 45px;
+  font-size: 18px;
+  font-family: "Montserrat", sans-serif;
+}
+
+ion-datetime {
+  background: #f9f9f9;
+  box-shadow: 5px 5px 5px 1px #00000024;
+  border-radius: 20px;
+  height: 45px;
+  font-size: 18px;
+  font-family: "Montserrat", sans-serif;
+}
+
+img {
+  width: 300px;
+  border-radius: 20px;
+}
+
+.red {
+  min-width: 150px;
+  height: 50px;
+  --border-radius: 10px;
+  --background: #ba3b46;
+}
+
+.white {
+  height: 50px;
+  min-width: 150px;
+  --border-radius: 10px;
+  color: #000000;
+  --background: #f9f9f9;
+}

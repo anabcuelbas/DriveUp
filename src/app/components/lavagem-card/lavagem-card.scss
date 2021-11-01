@@ -1,0 +1,59 @@
+ion-card {
+    width: 1200px;
+    height: 130px;
+    border-radius: 20px;
+}
+
+.main-text {
+    font-size: 24px;
+    color: #000000;
+    font-weight: 700;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.secondary-text {
+    font-size: 18px;
+    color: #000000;
+    font-family: 'Montserrat', sans-serif;
+}
+
+ion-icon {
+    width: 25px;
+    height: 25px;
+}
+
+.alinha-meio {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.preco {
+    color: #AA8F66;
+}
+
+.horario {
+    color: #ED9B40;
+}
+
+.data {
+    color: #61C9A8;
+}
+
+.text {
+    font-size: 14px;
+    font-weight: 700;
+    font-family: 'Montserrat', sans-serif;
+}
+
+ion-button {
+    width: 165px;
+    height: 50px;
+    --border-radius: 20px;
+    --background: #BA3B46;
+}
+
+.padding {
+    padding-top: 40px;
+    padding-left: 40px;
+}
