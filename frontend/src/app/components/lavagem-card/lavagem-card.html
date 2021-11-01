@@ -1,0 +1,58 @@
+<ion-card>
+  <ion-grid class="ion-no-margin ion-no-padding">
+    <ion-row>
+      <ion-col>
+        <ion-img [src]="servico.img"></ion-img>
+      </ion-col>
+      <ion-col size="3">
+        <ion-grid>
+          <ion-row>
+            <ion-col class="ion-padding">
+              <ion-text class="main-text">{{estabelecimento.nome}}</ion-text>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col class="ion-padding-start">
+              <ion-text class="secondary-text">{{estabelecimento.localizacao}}</ion-text>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-col>
+      <ion-col class="ion-padding-top">
+        <ion-grid>
+          <ion-row class="ion-padding-start">
+            <ion-col size="2">
+              <ion-icon class="preco" name="card-outline"></ion-icon>
+            </ion-col>
+            <ion-col class="alinha-meio">
+              <ion-text class="text preco">Tabela de Preços</ion-text>
+            </ion-col>
+          </ion-row>
+          <ion-row class="ion-padding-start">
+            <ion-col size="2">
+              <ion-icon class="horario" name="time-outline"></ion-icon>
+            </ion-col>
+            <ion-col class="alinha-meio">
+              <ion-text class="text horario">{{estabelecimento.horario_funcionamento}}</ion-text>
+            </ion-col>
+          </ion-row>
+          <ion-row class="ion-padding-start">
+            <ion-col size="2">
+              <ion-icon class="data" name="calendar-outline"></ion-icon>
+            </ion-col>
+            <ion-col class="alinha-meio">
+              <ion-text class="text data">Horários Disponíveis</ion-text>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-col>
+      <ion-col class="padding">
+        <ion-button (click)="navigateForward()">Agendar</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-card-header>
+    <ion-card-title>{{servico.nome}}</ion-card-title>
+  </ion-card-header>
+  <ion-card-content> {{servico.descricao}} </ion-card-content>
+</ion-card>
