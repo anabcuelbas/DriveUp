@@ -7,6 +7,7 @@ Este projeto foi desenvolvido para a disciplina Engenharia de Sistemas de Inform
 - **Linguagem:** JavaScript
 - **Frameworks:** Angular
 - **Plataformas:** Node.js, Netlify (deploy do Frontend), Heroku (deploy do Backend)
+- **Banco de Dados:** PostgreSQL, utilizando a ferramenta Elephant SQL
 
 ## Configurações
 
