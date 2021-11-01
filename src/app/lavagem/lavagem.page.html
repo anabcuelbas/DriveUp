@@ -1,0 +1,46 @@
+<!-- <ion-toolbar class="align-middle">
+    <ion-buttons slot="end">
+    </ion-buttons>
+    <ion-grid>
+        <ion-row>
+            <ion-col class="ion-no-margin ion-no-padding ion-padding-start" size="4">
+                <ion-img src='../assets/imgs/logo.png'> </ion-img>
+            </ion-col>
+            <ion-col class="ion-no-margin ion-no-padding align-middle" size="2">
+                <ion-text class="header-text">Home</ion-text>
+            </ion-col>
+            <ion-col class="ion-no-margin ion-no-padding align-middle" size="2">
+                <ion-text class="header-text">Como funciona</ion-text>
+            </ion-col>
+            <ion-col class="ion-no-margin ion-no-padding align-middle" size="2">
+                <ion-text class="header-text">Sobre nós</ion-text>
+            </ion-col>
+            <ion-col class="ion-no-margin ion-no-padding align-middle" size="2">
+                <ion-text class="header-text">
+                    Login
+                </ion-text>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-toolbar> -->
+<app-header></app-header>
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col class="padding-start ion-padding-bottom">
+        <ion-text class="main-text">Serviço {{servico.nome}}</ion-text>
+        <br><br>
+        <ion-text class="secondary-text">Escolha o melhor estabelecimento para você!</ion-text>
+      </ion-col>
+    </ion-row>
+    <ion-row class="padding-top ion-justify-content-center">
+      <ion-list lines="none">
+        <ng-container *ngFor="let item of servico.estabelecimentos">
+          <ion-col class="ion-padding-top teste">
+            <lavagem-card [servico]="servico" [estabelecimento]="item"></lavagem-card>
+          </ion-col>
+        </ng-container>
+      </ion-list>
+    </ion-row>
+  </ion-grid>
+</ion-content>

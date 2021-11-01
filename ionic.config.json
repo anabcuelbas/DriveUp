@@ -1,0 +1,7 @@
+{
+  "name": "driveUp",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

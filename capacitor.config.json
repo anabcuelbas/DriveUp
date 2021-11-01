@@ -1,0 +1,6 @@
+{
+	"appId": "io.ionic.starter",
+	"appName": "driveUp",
+	"webDir": "www",
+	"bundledWebRuntime": false
+}
