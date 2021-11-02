@@ -39,7 +39,24 @@ const getEstabelecimentosWithServico = async (req, res) => {
     });
 }
 
+const getHorarios = async (req, res) => {
+    const query = `
+        SELECT *
+        FROM horario_disponivel
+        WHERE estabelecimentoId = ${req.params.estabelecimentoId} AND servicoId = ${req.params.servicoId}
+    `;
+    
+    const response = await pool.query(query, (err, result) => {
+        if(err) {
+            console.log(err)
+        } else {
+            res.send(result)
+        }
+    });
+}
+
 module.exports = {
     getAllEstabelecimentos,
-    getEstabelecimentosWithServico
+    getEstabelecimentosWithServico,
+    getHorarios
 }
