@@ -1,26 +1,26 @@
 <app-header></app-header>
 <ion-content>
-  <ion-grid>
-    <ion-row>
-      <ion-col class="padding-start ion-padding-bottom">
-        <ion-text class="main-text">Serviços Disponíveis</ion-text>
-        <br><br>
-        <ion-text class="secondary-text">Selecione o serviço desejado e faça um agendamento em poucos cliques!
-        </ion-text>
-      </ion-col>
-    </ion-row>
-    <ion-row class="padding-top">
-      <!-- <ion-col size="2" class="align-middle-icon">
+	<ion-grid>
+		<ion-row>
+			<ion-col class="padding-start ion-padding-bottom">
+				<ion-text class="main-text">Serviços Disponíveis</ion-text>
+				<br><br>
+				<ion-text class="secondary-text">Selecione o serviço desejado e faça um agendamento em poucos cliques!
+				</ion-text>
+			</ion-col>
+		</ion-row>
+		<ion-row class="padding-top">
+			<!-- <ion-col size="2" class="align-middle-icon">
         <ion-icon (click)="antPagina()" name="chevron-back-outline"></ion-icon>
       </ion-col> -->
-      <ng-container *ngFor="let item of servicos">
-        <ion-col class="ion-padding-top teste">
-          <home-card routerLink='/lavagem' [queryParams]="{id: item.id}" [servico]="item"></home-card>
-        </ion-col>
-      </ng-container>
-      <!-- <ion-col size="2" class="align-middle-icon">
+			<ng-container *ngFor="let item of servicos">
+				<ion-col class="ion-padding-top teste">
+					<home-card routerLink='/lavagem' [queryParams]="{id: item.id, nome: item.nome}" [servico]="item"></home-card>
+				</ion-col>
+			</ng-container>
+			<!-- <ion-col size="2" class="align-middle-icon">
         <ion-icon (click)="proxPagina()" name="chevron-forward-outline"></ion-icon>
       </ion-col> -->
-    </ion-row>
-  </ion-grid>
+		</ion-row>
+	</ion-grid>
 </ion-content>
