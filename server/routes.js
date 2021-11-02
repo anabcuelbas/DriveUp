@@ -8,11 +8,11 @@ const { getAllEstabelecimentos, getEstabelecimentosWithServico } = require('./co
 router.get('/', (request, response) => response.json({ message: "API dos carros" }));
 
 router.get('/estabelecimentos', getAllEstabelecimentos);
-router.get('/oferta-servicos', getEstabelecimentosWithServico);
+router.get('/oferta-servicos/:id', getEstabelecimentosWithServico);
 
 router.get('/servicos', getServicos);
-router.get('/sub-servicos', getSubServicos);
-router.get('/preco', getPrecoSubServico);
+router.get('/sub-servicos/:servico-id/:estabelecimento-id', getSubServicos);
+router.get('/preco/:subservico-id/:tipo-veiculo', getPrecoSubServico);
 
 router.get('/reservas', getReservas);
 router.post('/reserva', addReserva);

@@ -26,7 +26,7 @@ const getEstabelecimentosWithServico = async (req, res) => {
         WHERE estabelecimento.id IN (
             SELECT estabelecimentoId 
             FROM servico_estabelecimento
-            WHERE servicoId = ${req.body.servicoId}
+            WHERE servicoId = ${req.param.servicoId}
         )
     `;
 
