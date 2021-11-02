@@ -1,140 +1,140 @@
 <app-header></app-header>
 <ion-content>
-  <ion-grid>
-    <ion-row>
-      <ion-col class="padding-start ion-padding-bottom">
-        <ion-text class="main-text">Agendamento - {{servico.nome}}</ion-text>
-        <br><br>
-      </ion-col>
-    </ion-row>
-    <ion-row class="padding-top ion-justify-content-center">
-      <ion-card>
-        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+	<ion-grid>
+		<ion-row>
+			<ion-col class="padding-start ion-padding-bottom">
+				<ion-text class="main-text">Agendamento - Lavagem</ion-text>
+				<br><br>
+			</ion-col>
+		</ion-row>
+		<ion-row class="padding-top ion-justify-content-center">
+			<ion-card>
+				<form [formGroup]="form" (ngSubmit)="onSubmit()">
 
-          <ion-grid>
-            <ion-row>
-              <ion-col size="8">
-                <ion-grid>
-                  <ion-row>
-                    <ion-col class="ion-padding">
-                      <ion-text class="secondary-text">Informações Pessoais</ion-text>
-                      <br><br>
-                      <ion-text class="simple-text">Nome completo</ion-text>
-                      <ion-input formControlName="nome"></ion-input>
-                      <br>
-                      <span class="error ion-padding"
-                        [class.show]="form.get('nome')?.invalid && form.get('nome')?.touched">
-                        Informe o nome completo.
-                      </span>
-                    </ion-col>
-                  </ion-row>
-                  <ion-row>
-                    <ion-col class="ion-padding">
-                      <ion-text class="simple-text">Data de nascimento</ion-text>
-                      <ion-datetime displayFormat="MM/DD/YYYY" formControlName="nascimento"></ion-datetime>
-                      <br>
-                      <span class="error ion-padding"
-                        [class.show]="form.get('nascimento')?.invalid && form.get('nascimento')?.touched">
-                        Selecione uma data válida.
-                      </span>
-                    </ion-col>
-                    <ion-col class="ion-padding">
-                      <ion-text class="simple-text">
-                        E-mail
-                      </ion-text>
-                      <ion-input formControlName="email"></ion-input>
-                      <br>
-                      <span class="error ion-padding"
-                        [class.show]="form.get('email')?.invalid && form.get('email')?.touched">
-                        O email deve ter o formato exemplo@exemplo.com
-                      </span>
-                    </ion-col>
-                  </ion-row>
-                  <ion-row>
-                    <ion-col class="ion-padding">
-                      <ion-text class=" secondary-text "> Serviço</ion-text>
-                    </ion-col>
-                  </ion-row>
-                  <ion-row>
-                    <ion-col class="ion-padding ">
-                      <ion-text class="simple-text">
-                        Tipo do veículo
-                      </ion-text>
-                      <ion-select formControlName="veiculoTipo">
-                        <ion-select-option value="Carro">Carro</ion-select-option>
-                        <ion-select-option value="Moto">Moto</ion-select-option>
-                        <ion-select-option value="Bicicleta">Bicicleta</ion-select-option>
-                        <ion-select-option value="Caminhão">Caminhão</ion-select-option>
-                      </ion-select>
-                      <br>
-                      <span class="error ion-padding"
-                        [class.show]="form.get('veiculoTipo')?.invalid && form.get('veiculoTipo')?.touched">
-                        Selecione um tipo de veículo.
-                      </span>
-                    </ion-col>
-                    <ion-col class="ion-padding">
-                      <ion-text class="simple-text ">Opção de serviço</ion-text>
-                      <ion-select formControlName="servicoTipo">
-                        <ion-select-option *ngFor="let item of servico.tipo" [value]="item">{{item.nome}}
-                        </ion-select-option>
-                      </ion-select>
-                      <br>
-                      <span class="error ion-padding"
-                        [class.show]="form.get('servicoTipo')?.invalid && form.get('servicoTipo')?.touched">
-                        Selecione um tipo de serviço.
-                      </span>
-                    </ion-col>
-                  </ion-row>
-                  <ion-row>
-                    <ion-col class="ion-padding">
-                      <ion-text class="simple-text">Horário</ion-text>
-                      <ion-select formControlName="horario">
-                        <ion-select-option *ngFor="let item of estabelecimento.horario_disponivel" [value]="item">
-                          {{item}}</ion-select-option>
-                      </ion-select>
-                      <br>
-                      <span class="error ion-padding"
-                        [class.show]="form.get('horario')?.invalid && form.get('horario')?.touched">
-                        Selecione um horário.
-                      </span>
-                    </ion-col>
-                    <ion-col class="ion-padding ">
-                      <ion-text class="simple-text">Opção de pagamento</ion-text>
-                      <ion-select formControlName="pagamento">
-                        <ion-select-option value="Crédito">Crédito</ion-select-option>
-                        <ion-select-option value="Débito">Débito</ion-select-option>
-                        <ion-select-option value="Dinheiro">Dinheiro</ion-select-option>
-                        <ion-select-option value="Pic Pay">Pic Pay</ion-select-option>
-                      </ion-select>
-                      <br>
-                      <span class="error ion-padding"
-                        [class.show]="form.get('pagamento')?.invalid && form.get('pagamento')?.touched">
-                        Selecione uma forma de pagamento.
-                      </span>
-                    </ion-col>
-                  </ion-row>
-                </ion-grid>
-              </ion-col>
-              <ion-col class="ion-justify-content-center ion-text-center ion-padding">
-                <img class="img" [src]="servico.img"><br><br>
-                <ion-text class="secondary-text">{{estabelecimento.nome}}</ion-text>
-                <br><br>
-                <ion-text class="simple-text"><b>Endereço:</b> {{estabelecimento.localizacao}}
-                </ion-text>
-                <br><br>
-                <ion-text class="simple-text"><b>Horário:</b>{{hora}}</ion-text>
-                <br><br>
-                <ion-text class="simple-text"><b>Serviço:</b>{{servicoTipo}}</ion-text>
-                <br><br>
-                <ion-button class="white">Valor: {{valor}}</ion-button>
-                <br><br>
-                <ion-button class="red" type="submit">Finalizar Agendamento</ion-button>
-              </ion-col>
-            </ion-row>
-          </ion-grid>
+					<ion-grid>
+						<ion-row>
+							<ion-col size="8">
+								<ion-grid>
+									<ion-row>
+										<ion-col class="ion-padding">
+											<ion-text class="secondary-text">Informações Pessoais</ion-text>
+											<br><br>
+											<ion-text class="simple-text">Nome completo</ion-text>
+											<ion-input formControlName="nome"></ion-input>
+											<br>
+											<span class="error ion-padding"
+												[class.show]="form.get('nome')?.invalid && form.get('nome')?.touched">
+												Informe o nome completo.
+											</span>
+										</ion-col>
+									</ion-row>
+									<ion-row>
+										<ion-col class="ion-padding">
+											<ion-text class="simple-text">Data de nascimento</ion-text>
+											<ion-datetime displayFormat="MM/DD/YYYY" formControlName="nascimento"></ion-datetime>
+											<br>
+											<span class="error ion-padding"
+												[class.show]="form.get('nascimento')?.invalid && form.get('nascimento')?.touched">
+												Selecione uma data válida.
+											</span>
+										</ion-col>
+										<ion-col class="ion-padding">
+											<ion-text class="simple-text">
+												E-mail
+											</ion-text>
+											<ion-input formControlName="email"></ion-input>
+											<br>
+											<span class="error ion-padding"
+												[class.show]="form.get('email')?.invalid && form.get('email')?.touched">
+												O email deve ter o formato exemplo@exemplo.com
+											</span>
+										</ion-col>
+									</ion-row>
+									<ion-row>
+										<ion-col class="ion-padding">
+											<ion-text class=" secondary-text "> Serviço</ion-text>
+										</ion-col>
+									</ion-row>
+									<ion-row>
+										<ion-col class="ion-padding ">
+											<ion-text class="simple-text">
+												Tipo do veículo
+											</ion-text>
+											<ion-select formControlName="veiculoTipo">
+												<ion-select-option value="Carro">Carro</ion-select-option>
+												<ion-select-option value="Moto">Moto</ion-select-option>
+												<ion-select-option value="Bicicleta">Bicicleta</ion-select-option>
+												<ion-select-option value="Caminhão">Caminhão</ion-select-option>
+											</ion-select>
+											<br>
+											<span class="error ion-padding"
+												[class.show]="form.get('veiculoTipo')?.invalid && form.get('veiculoTipo')?.touched">
+												Selecione um tipo de veículo.
+											</span>
+										</ion-col>
+										<ion-col class="ion-padding">
+											<ion-text class="simple-text ">Opção de serviço</ion-text>
+											<ion-select formControlName="servicoTipo">
+												<ion-select-option *ngFor="let item of subTipos" [value]="item">{{item.nome}}
+												</ion-select-option>
+											</ion-select>
+											<br>
+											<span class="error ion-padding"
+												[class.show]="form.get('servicoTipo')?.invalid && form.get('servicoTipo')?.touched">
+												Selecione um tipo de serviço.
+											</span>
+										</ion-col>
+									</ion-row>
+									<ion-row>
+										<ion-col class="ion-padding">
+											<ion-text class="simple-text">Horário</ion-text>
+											<ion-select formControlName="horario">
+												<ion-select-option [value]="funcionamento">
+													{{funcionamento}}</ion-select-option>
+											</ion-select>
+											<br>
+											<span class="error ion-padding"
+												[class.show]="form.get('horario')?.invalid && form.get('horario')?.touched">
+												Selecione um horário.
+											</span>
+										</ion-col>
+										<ion-col class="ion-padding ">
+											<ion-text class="simple-text">Opção de pagamento</ion-text>
+											<ion-select formControlName="pagamento">
+												<ion-select-option value="Crédito">Crédito</ion-select-option>
+												<ion-select-option value="Débito">Débito</ion-select-option>
+												<ion-select-option value="Dinheiro">Dinheiro</ion-select-option>
+												<ion-select-option value="Pic Pay">Pic Pay</ion-select-option>
+											</ion-select>
+											<br>
+											<span class="error ion-padding"
+												[class.show]="form.get('pagamento')?.invalid && form.get('pagamento')?.touched">
+												Selecione uma forma de pagamento.
+											</span>
+										</ion-col>
+									</ion-row>
+								</ion-grid>
+							</ion-col>
+							<ion-col class="ion-justify-content-center ion-text-center ion-padding">
+								<!-- <img class="img" [src]="servico.img"><br><br> -->
+								<ion-text class="secondary-text">{{nome}}</ion-text>
+								<br><br>
+								<ion-text class="simple-text"><b>Endereço:</b> {{endereco}}
+								</ion-text>
+								<br><br>
+								<ion-text class="simple-text"><b>Horário:</b>{{hora}}</ion-text>
+								<br><br>
+								<ion-text class="simple-text"><b>Serviço:</b>{{servicoTipo}}</ion-text>
+								<br><br>
+								<ion-button class="white">Valor: {{valor}}</ion-button>
+								<br><br>
+								<ion-button class="red" type="submit">Finalizar Agendamento</ion-button>
+							</ion-col>
+						</ion-row>
+					</ion-grid>
 
-        </form>
-      </ion-card>
-    </ion-row>
-  </ion-grid>
+				</form>
+			</ion-card>
+		</ion-row>
+	</ion-grid>
 </ion-content>
