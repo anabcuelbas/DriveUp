@@ -27,7 +27,7 @@ const getSubServicos = async (req, res) => {
         WHERE sub_servico.Id IN (
             SELECT Id 
             FROM sub_servico
-            WHERE servicoId = ${req.param.servicoId} AND estabelecimentoId = ${req.param.estabelecimentoId}
+            WHERE servicoId = ${req.params.servicoId} AND estabelecimentoId = ${req.params.estabelecimentoId}
         )
     `;
 
@@ -44,7 +44,7 @@ const getPrecoSubServico = async (req, res) => {
     const query = `
         SELECT Valor 
         FROM preco
-        WHERE SubServicoId = ${req.param.subServicoId} AND (TipoVeiculo = '${req.param.tipoVeiculo}' OR TipoVeiculo = 'Todos')
+        WHERE SubServicoId = ${req.params.subServicoId} AND (TipoVeiculo = '${req.params.tipoVeiculo}' OR TipoVeiculo = 'Todos')
     `;
 
     const response = await pool.query(query, (err, result) => {
