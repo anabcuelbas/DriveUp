@@ -2,7 +2,7 @@ import { Tipo } from './tipo-servico.model';
 
 export interface Agendamento {
   nome: string;
-  nascimento: any;
+  telefone: any;
   email: string;
   veiculoTipo: string;
   servicoTipo: Tipo;

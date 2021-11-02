@@ -61,7 +61,7 @@ export class AgendamentoPage implements OnInit {
 	public mountForm(): void {
 		this.form = this.fb.group({
 			nome: ['', Validators.required],
-			nascimento: [null, Validators.required],
+			telefone: [null, Validators.required],
 			email: ['', Validators.compose([Validators.required, Validators.email])],
 			veiculoTipo: ['', Validators.required],
 			servicoTipo: ['', Validators.required],
