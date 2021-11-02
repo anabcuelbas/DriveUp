@@ -9,6 +9,22 @@ const pool = new Pool({
     port: '5432'
 })
 
+const getServico = async (req, res) => {
+    const query = `
+        SELECT *
+        FROM servico
+        WHERE id = ${req.params.servicoId}
+    `;
+
+    const response = await pool.query(query, (err, result) => {
+        if(err) {
+            console.log(err)
+        } else {
+            res.send(result)
+        }
+    });
+}
+
 const getServicos = async (req, res) => {
     const query = "SELECT * FROM servico";
     const response = await pool.query(query, (err, result) => {
@@ -57,6 +73,7 @@ const getPrecoSubServico = async (req, res) => {
 }
 
 module.exports = {
+    getServico,
     getServicos,
     getSubServicos,
     getPrecoSubServico
