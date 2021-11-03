@@ -21,10 +21,13 @@ export class AgendamentoPage implements OnInit {
 	public servico: Servico;
 	public subTipos: Tipo[] = [];
 	public horarios: any[] = [];
+	public precos: any[] = [];
 	public form!: FormGroup;
 
 	public hora: any;
 	public servicoTipo: string;
+	public servicoTipoId: string;
+	public veiculoTipo: string;
 	public valor: string;
 	public agendamento: Agendamento;
 
@@ -38,6 +41,19 @@ export class AgendamentoPage implements OnInit {
 		});
 	}
 
+	public getpreco(): any {
+		this.servicosService.getPrecoByVeiculoAndSubServicoID(this.servicoTipoId, this.veiculoTipo).subscribe((item) => {
+			if(item.rowCount > 0) {
+				item.rows.forEach((element) => {
+					this.valor = `R$ ${element.valor}`;
+					return;
+				});
+			} else {
+				this.valor = "";
+			}
+		});
+	}
+
 	ngOnInit(): void {
 		this.mountForm();
 
@@ -46,7 +62,12 @@ export class AgendamentoPage implements OnInit {
 		});
 		this.form.get('servicoTipo')?.valueChanges.subscribe((data: Tipo) => {
 			this.servicoTipo = data?.nome;
-			//this.valor = data?.valor;
+			this.servicoTipoId = data?.id;
+			this.getpreco();
+		});
+		this.form.get('veiculoTipo')?.valueChanges.subscribe((data) => {
+			this.veiculoTipo = data;
+			this.getpreco();
 		});
 
 		this.servicosService.getSubtipoByServicoAndEstabelecimentoID(this.servicoId, this.estabelecimentoId).subscribe((item) => {
