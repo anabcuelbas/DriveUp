@@ -89,8 +89,8 @@
 										<ion-col class="ion-padding">
 											<ion-text class="simple-text">Horário</ion-text>
 											<ion-select formControlName="horario">
-												<ion-select-option [value]="funcionamento">
-													{{funcionamento}}</ion-select-option>
+												<ion-select-option *ngFor="let item of horarios" [value]="item">
+													{{item.horario}}</ion-select-option>
 											</ion-select>
 											<br>
 											<span class="error ion-padding"

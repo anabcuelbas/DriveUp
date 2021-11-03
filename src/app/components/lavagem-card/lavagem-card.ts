@@ -14,7 +14,7 @@ export class LavagemCardComponent {
 
 	navigateForward() {
 		this.router.navigate([`agendamento`], {
-			queryParams: { id: this.servicoId, estabelecimentoId: this.estabelecimento.id, funcionamento: this.estabelecimento.diasfuncionamento, endereco: this.estabelecimento.endereco, nome: this.estabelecimento.nome },
+			queryParams: { id: this.servicoId, estabelecimentoId: this.estabelecimento.id, endereco: this.estabelecimento.endereco, nome: this.estabelecimento.nome },
 		});
 	}
 }

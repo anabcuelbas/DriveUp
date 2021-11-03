@@ -15,12 +15,12 @@ export class AgendamentoPage implements OnInit {
 	navigate: any;
 	public servicoId = '';
 	public estabelecimentoId: any;
-	public funcionamento: string;
 	public endereco: any;
 	public nome: any;
 
 	public servico: Servico;
 	public subTipos: Tipo[] = [];
+	public horarios: any[] = [];
 	public form!: FormGroup;
 
 	public hora: any;
@@ -34,7 +34,6 @@ export class AgendamentoPage implements OnInit {
 			this.servicoId = item.id;
 			this.estabelecimentoId = item.estabelecimentoId;
 			this.nome = item.nome;
-			this.funcionamento = item.funcionamento;
 			this.endereco = item.endereco;
 		});
 	}
@@ -54,7 +53,12 @@ export class AgendamentoPage implements OnInit {
 			item.rows.forEach((element) => {
 				this.subTipos.push(element);
 			});
-			console.log(this.subTipos);
+		});
+
+		this.servicosService.getHorarioByServicoAndEstabelecimentoID(this.servicoId, this.estabelecimentoId).subscribe((item) => {
+			item.rows.forEach((element) => {
+				this.horarios.push(element);
+			});
 		});
 	}
 
