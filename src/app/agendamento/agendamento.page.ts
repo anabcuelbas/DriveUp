@@ -58,7 +58,7 @@ export class AgendamentoPage implements OnInit {
 		this.mountForm();
 
 		this.form.get('horario')?.valueChanges.subscribe((data) => {
-			this.hora = data;
+			this.hora = data.horario;
 		});
 		this.form.get('servicoTipo')?.valueChanges.subscribe((data: Tipo) => {
 			this.servicoTipo = data?.nome;
