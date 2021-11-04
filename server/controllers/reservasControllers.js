@@ -44,7 +44,7 @@ const addReserva = async (req, res) => {
         from: process.env.MAILER_USER,
         to: email,
         subject: 'Agendamento confirmado!',
-        text: 'Olá, ' + nomeDono + '!\nSeu agendamento de ' + servico + ' está confirmado para o dia ' + data + ' às ' + horario,
+        text: 'Olá, ' + nomeDono + '!\nSeu agendamento de ' + servico + ' está confirmado para o dia ' + horario,
     };
 
     remetente.sendMail(emailToSend, function(error) {

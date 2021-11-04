@@ -23,7 +23,7 @@ export class AgendamentoPage implements OnInit {
 	public precos: any[] = [];
 	public form!: FormGroup;
 
-	public hora: any;
+	public hora: string;
 	public servicoTipo: string;
 	public servicoTipoId: string;
 	public veiculoTipo: string;
@@ -35,12 +35,7 @@ export class AgendamentoPage implements OnInit {
 		data: '',
 		horario: '',
 		tipoVeiculo: '',
-		servico: {
-			id: '',
-			nome: '',
-			servicoId: '',
-			estabelecimentoId: '',
-		},
+		servico: '',
 	};
 
 	constructor(private menu: MenuController, private route: ActivatedRoute, private servicosService: ServicosService, private fb: FormBuilder, public toastController: ToastController, private router: Router) {
@@ -126,15 +121,15 @@ export class AgendamentoPage implements OnInit {
 		this.agendamento.nomeDono = this.form.get('nome').value;
 		this.agendamento.telefone = this.form.get('telefone').value;
 		this.agendamento.email = this.form.get('email').value;
-		this.agendamento.horario = this.form.get('horario').value;
+		this.agendamento.horario = this.hora;
 		this.agendamento.data = '10/11/2021';
-		this.agendamento.servico = this.form.get('servicoTipo').value;
+		this.agendamento.servico = this.servicoTipo;
 		this.agendamento.tipoVeiculo = this.form.get('veiculoTipo').value;
 
 		this.presentToast();
-		// this.servicosService.addReservas(this.agendamento).subscribe((item) => {
-		// 	console.log(item);
-		// });
+		this.servicosService.addReservas(this.agendamento).subscribe((item) => {
+		 	//console.log(item);
+		});
 		this.router.navigate(['/home']);
 	}
 
