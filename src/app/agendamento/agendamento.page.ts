@@ -84,7 +84,11 @@ export class AgendamentoPage implements OnInit {
 		this.form.get('servicoTipo')?.valueChanges.subscribe((data: Tipo) => {
 			this.servicoTipo = data?.nome;
 			this.servicoTipoId = data?.id;
-			this.getUpdatedVeiculo();
+			this.getpreco();
+		});
+		this.form.get('veiculoTipo')?.valueChanges.subscribe((data) => {
+			this.veiculoTipo = data;
+			this.getpreco();
 		});
 
 		this.servicosService.getSubtipoByServicoAndEstabelecimentoID(this.servicoId, this.estabelecimentoId).subscribe((item) => {
@@ -97,13 +101,6 @@ export class AgendamentoPage implements OnInit {
 			item.rows.forEach((element) => {
 				this.horarios.push(element);
 			});
-		});
-	}
-
-	public getUpdatedVeiculo() {
-		this.form.get('veiculoTipo')?.valueChanges.subscribe((data) => {
-			this.veiculoTipo = data;
-			this.getpreco();
 		});
 	}
 

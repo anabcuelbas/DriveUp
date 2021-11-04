@@ -137,10 +137,6 @@ export class ServicosService {
 		return this.http.get<any>(`${environment.apiUrl}/sub-servicos/${servicoId}/${estabelecimentoId}`);
 	}
 
-	public getHorarioByServicoAndEstabelecimentoID(servicoId: string, estabelecimentoId: string): Observable<any> {
-		return this.http.get<any>(`${environment.apiUrl}/horarios/${estabelecimentoId}/${servicoId}`);
-	}
-
 	public getPrecoByVeiculoAndSubServicoID(subTipoId: string, veiculo: string): Observable<any> {
 		return this.http.get<any>(`${environment.apiUrl}/preco/${subTipoId}/${veiculo}`);
 	}
