@@ -1,12 +1,13 @@
 import { Tipo } from './tipo-servico.model';
 
 export interface Agendamento {
-  nome: string;
-  telefone: any;
-  email: string;
-  veiculoTipo: string;
-  servicoTipo: Tipo;
-  horario: any;
-  pagamento: string;
-  valor: string;
+	nomeDono: string;
+	telefone: any;
+	email: string;
+	tipoVeiculo: string;
+	servico: Tipo;
+	data: any;
+	horario: any;
+	// pagamento: string;
+	// valor: string;
 }

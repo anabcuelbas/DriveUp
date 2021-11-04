@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
-import { MenuController } from '@ionic/angular';
+import { ActivatedRoute, Router } from '@angular/router';
+import { MenuController, ToastController } from '@ionic/angular';
 import { Agendamento } from '../models/agendamento.model';
-import { Servico } from '../models/servico.model';
 import { Tipo } from '../models/tipo-servico.model';
 import { ServicosService } from '../services/servicos.service';
 @Component({
@@ -17,8 +16,8 @@ export class AgendamentoPage implements OnInit {
 	public estabelecimentoId: any;
 	public endereco: any;
 	public nome: any;
+	public servicoNome: any;
 
-	public servico: Servico;
 	public subTipos: Tipo[] = [];
 	public horarios: any[] = [];
 	public precos: any[] = [];
@@ -29,27 +28,49 @@ export class AgendamentoPage implements OnInit {
 	public servicoTipoId: string;
 	public veiculoTipo: string;
 	public valor: string;
-	public agendamento: Agendamento;
+	public agendamento: Agendamento = {
+		nomeDono: '',
+		telefone: '',
+		email: '',
+		data: '',
+		horario: '',
+		tipoVeiculo: '',
+		servico: {
+			id: '',
+			nome: '',
+			servicoId: '',
+			estabelecimentoId: '',
+		},
+	};
 
-	constructor(private menu: MenuController, private route: ActivatedRoute, private servicosService: ServicosService, private fb: FormBuilder) {
+	constructor(private menu: MenuController, private route: ActivatedRoute, private servicosService: ServicosService, private fb: FormBuilder, public toastController: ToastController, private router: Router) {
 		this.sideMenu();
 		this.route.queryParams.subscribe((item) => {
 			this.servicoId = item.id;
 			this.estabelecimentoId = item.estabelecimentoId;
 			this.nome = item.nome;
 			this.endereco = item.endereco;
+			this.servicoNome = item.servicoNome;
 		});
+	}
+
+	async presentToast() {
+		const toast = await this.toastController.create({
+			message: 'Agendamento realizado com sucesso!',
+			duration: 2000,
+		});
+		toast.present();
 	}
 
 	public getpreco(): any {
 		this.servicosService.getPrecoByVeiculoAndSubServicoID(this.servicoTipoId, this.veiculoTipo).subscribe((item) => {
-			if(item.rowCount > 0) {
+			if (item.rowCount > 0) {
 				item.rows.forEach((element) => {
 					this.valor = `R$ ${element.valor}`;
 					return;
 				});
 			} else {
-				this.valor = "";
+				this.valor = '';
 			}
 		});
 	}
@@ -63,11 +84,7 @@ export class AgendamentoPage implements OnInit {
 		this.form.get('servicoTipo')?.valueChanges.subscribe((data: Tipo) => {
 			this.servicoTipo = data?.nome;
 			this.servicoTipoId = data?.id;
-			this.getpreco();
-		});
-		this.form.get('veiculoTipo')?.valueChanges.subscribe((data) => {
-			this.veiculoTipo = data;
-			this.getpreco();
+			this.getUpdatedVeiculo();
 		});
 
 		this.servicosService.getSubtipoByServicoAndEstabelecimentoID(this.servicoId, this.estabelecimentoId).subscribe((item) => {
@@ -76,10 +93,17 @@ export class AgendamentoPage implements OnInit {
 			});
 		});
 
-		this.servicosService.getHorarioByServicoAndEstabelecimentoID(this.servicoId, this.estabelecimentoId).subscribe((item) => {
+		this.servicosService.getHorarioByEstabelecimentoID(this.estabelecimentoId, this.servicoId).subscribe((item) => {
 			item.rows.forEach((element) => {
 				this.horarios.push(element);
 			});
+		});
+	}
+
+	public getUpdatedVeiculo() {
+		this.form.get('veiculoTipo')?.valueChanges.subscribe((data) => {
+			this.veiculoTipo = data;
+			this.getpreco();
 		});
 	}
 
@@ -102,8 +126,19 @@ export class AgendamentoPage implements OnInit {
 			return;
 		}
 
-		console.log('Agendamento realizado: ', this.form.value);
-		// setar os valores do form para a variável agendamento
+		this.agendamento.nomeDono = this.form.get('nome').value;
+		this.agendamento.telefone = this.form.get('telefone').value;
+		this.agendamento.email = this.form.get('email').value;
+		this.agendamento.horario = this.form.get('horario').value;
+		this.agendamento.data = '10/11/2021';
+		this.agendamento.servico = this.form.get('servicoTipo').value;
+		this.agendamento.tipoVeiculo = this.form.get('veiculoTipo').value;
+
+		this.presentToast();
+		// this.servicosService.addReservas(this.agendamento).subscribe((item) => {
+		// 	console.log(item);
+		// });
+		this.router.navigate(['/home']);
 	}
 
 	sideMenu() {

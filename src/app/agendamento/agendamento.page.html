@@ -3,7 +3,7 @@
 	<ion-grid>
 		<ion-row>
 			<ion-col class="padding-start ion-padding-bottom">
-				<ion-text class="main-text">Agendamento - Lavagem</ion-text>
+				<ion-text class="main-text">Agendamento - {{servicoNome}}</ion-text>
 				<br><br>
 			</ion-col>
 		</ion-row>
@@ -35,7 +35,7 @@
 											<br>
 											<span class="error ion-padding"
 												[class.show]="form.get('telefone')?.invalid && form.get('telefone')?.touched">
-												Selecione um telefone válido.
+												Informe um número de telefone válido.
 											</span>
 										</ion-col>
 										<ion-col class="ion-padding">
@@ -86,7 +86,7 @@
 									</ion-row>
 									<ion-row>
 										<ion-col class="ion-padding">
-											<ion-text class="simple-text">Horário</ion-text>
+											<ion-text class="simple-text">Data e Hora</ion-text>
 											<ion-select formControlName="horario">
 												<ion-select-option *ngFor="let item of horarios" [value]="item">
 													{{item.horario}}</ion-select-option>
@@ -94,7 +94,7 @@
 											<br>
 											<span class="error ion-padding"
 												[class.show]="form.get('horario')?.invalid && form.get('horario')?.touched">
-												Selecione um horário.
+												Selecione uma data e um horário.
 											</span>
 										</ion-col>
 										<ion-col class="ion-padding ">

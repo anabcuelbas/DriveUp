@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
+import { Agendamento } from '../models/agendamento.model';
 import { Estabelecimento } from '../models/estabelecimento.model';
 import { Servico } from '../models/servico.model';
 
@@ -142,5 +143,13 @@ export class ServicosService {
 
 	public getPrecoByVeiculoAndSubServicoID(subTipoId: string, veiculo: string): Observable<any> {
 		return this.http.get<any>(`${environment.apiUrl}/preco/${subTipoId}/${veiculo}`);
+	}
+
+	public getHorarioByEstabelecimentoID(estabId: string, servId: string): Observable<any> {
+		return this.http.get<any>(`${environment.apiUrl}/horarios/${estabId}/${servId}`);
+	}
+
+	public addReservas(reserva: Agendamento): Observable<any> {
+		return this.http.post<any>(`${environment.apiUrl}/reserva`, reserva);
 	}
 }
