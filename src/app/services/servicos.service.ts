@@ -125,6 +125,16 @@ export class ServicosService {
 		},
 	];
 
+	public imagensServicos = [
+		'https://s3.sa-east-1.amazonaws.com/revista.mobiauto/Fernando+Garcia/29-06+-+Como+lavar+o+carro+em+casa/Como+lavar+o+carro+em+casa4.jpg',
+		'https://i2.wp.com/www.tempario.com.br/wp-content/uploads/2019/06/ferramentas-para-oficina-mec%C3%A2nica-1-1.jpg?zoom=1.25&w=610',
+		'https://s2.glbimg.com/1lRKsKreVqffH30u4DskyG7_HuY=/0x0:2000x1333/984x0/smart/filters:strip_icc()/s.glbimg.com/jo/g1/f/original/2018/08/01/venda-carros-novos_2018-07-13_q98a7885_fabio_tito-g1.jpg',
+		'https://doutormultas.com.br/wp-content/uploads/2017/10/como-pintar-um-carro-alteracao-de-cor.webp',
+		'https://mobilidade.estadao.com.br/wp-content/uploads/2020/12/Aluguel-de-carrosFrota-Localiza4.jpg'
+	];
+
+	public imagensLocais = 'https://www.hightorque.com.br/wp-content/uploads/2016/08/oficina_high_torque_sao_jose_dos_campos_sjc_fachada-1099x625.jpg';
+
 	public listServices(): Observable<any> {
 		return this.http.get<any>(`${environment.apiUrl}/servicos`);
 	}
