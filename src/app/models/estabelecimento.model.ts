@@ -4,4 +4,5 @@ export interface Estabelecimento {
 	horafuncionamento: string;
 	diasfuncionamento: string;
 	endereco: string;
+	img: string;
 }

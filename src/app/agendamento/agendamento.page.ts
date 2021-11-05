@@ -17,6 +17,7 @@ export class AgendamentoPage implements OnInit {
 	public endereco: any;
 	public nome: any;
 	public servicoNome: any;
+	public img = 'https://www.hightorque.com.br/wp-content/uploads/2016/08/oficina_high_torque_sao_jose_dos_campos_sjc_fachada-1099x625.jpg';
 
 	public subTipos: Tipo[] = [];
 	public horarios: any[] = [];

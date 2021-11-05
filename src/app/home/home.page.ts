@@ -16,15 +16,21 @@ SwiperCore.use([Navigation]);
 export class HomePage implements OnInit {
 	navigate: any;
 	public servicos: Servico[] = [];
+	public img: string[] = [];
 
 	constructor(private menu: MenuController, public router: Router, private route: ActivatedRoute, private servicosService: ServicosService) {
 		this.sideMenu();
 	}
 
 	ngOnInit(): void {
+		var count = 0;
+		this.img = this.servicosService.imagensServicos;
+
 		this.servicosService.listServices().subscribe((item) => {
 			item.rows.forEach((element) => {
+				element.img = this.img[count];
 				this.servicos.push(element);
+				count++;
 			});
 		});
 	}

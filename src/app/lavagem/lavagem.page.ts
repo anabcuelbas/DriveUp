@@ -13,6 +13,7 @@ export class LavagemPage implements OnInit {
 	public servicoId = '';
 	public servicoNome = '';
 	public estabelecimentos: Estabelecimento[] = [];
+	public img: string;
 
 	constructor(private menu: MenuController, private route: ActivatedRoute, private servicosService: ServicosService) {
 		this.sideMenu();
@@ -24,8 +25,11 @@ export class LavagemPage implements OnInit {
 	}
 
 	public getEstabelecimento(): any {
+		this.img = this.servicosService.imagensLocais;
+
 		this.servicosService.getEstabelecimentoByServicoID(this.servicoId).subscribe((item) => {
 			item.rows.forEach((element) => {
+				element.img = this.img;
 				this.estabelecimentos.push(element);
 			});
 		});
