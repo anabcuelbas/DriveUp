@@ -1,0 +1,50 @@
+<ion-content>
+	<ion-grid>
+		<ion-row class="padding-top ion-justify-content-center">
+			<ion-card>
+				<form>
+					<ion-grid>
+						<ion-row>
+							<ion-col size="12">
+								<ion-grid>
+									<ion-row>
+										<ion-col class="ion-padding">
+											<ion-text class="secondary-text">Login</ion-text>
+											<br><br><br><br>
+											<ion-text class="simple-text">Email</ion-text>
+											<ion-input formControlName="nome"></ion-input>
+											<br>
+											<span class="error ion-padding"
+												[class.show]="form.get('nome')?.invalid && form.get('nome')?.touched">
+												Informe o email correto.
+											</span>
+										</ion-col>
+									</ion-row>
+									<ion-row>
+										<ion-col class="ion-padding">
+											<ion-text class="simple-text">Senha</ion-text>
+											<ion-input type="tel" formControlName="telefone"></ion-input>
+											<br>
+											<span class="error ion-padding"
+												[class.show]="form.get('telefone')?.invalid && form.get('telefone')?.touched">
+												Senha inválida
+											</span>
+										</ion-col>
+									</ion-row>
+									<ion-row>
+										<ion-col class="ion-padding">
+											<ion-button class="red ion-margin-bottom" type="submit">Entrar</ion-button>
+											<ion-text class="simple-text__nova-conta">Não tem conta? Cria uma
+											</ion-text>
+										</ion-col>
+									</ion-row>
+								</ion-grid>
+							</ion-col>
+						</ion-row>
+					</ion-grid>
+
+				</form>
+			</ion-card>
+		</ion-row>
+	</ion-grid>
+</ion-content>
