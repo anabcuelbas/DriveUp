@@ -20,7 +20,9 @@ export class NovaContaComponent implements OnInit {
 
 	public mountForm(): void {
 		this.form = this.fb.group({
+			name: ['', Validators.required],
 			email: ['', Validators.compose([Validators.required, Validators.email])],
+			phone: ['', Validators.compose([Validators.required, Validators.minLength(11)])],
 			password: ['', Validators.required],
 			confirmPassword: ['', Validators.required],
 		});

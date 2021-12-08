@@ -11,12 +11,34 @@
 										<ion-col class="ion-padding">
 											<ion-text class="secondary-text">Criar conta</ion-text>
 											<br><br><br><br>
+											<ion-text class="simple-text">Nome</ion-text>
+											<ion-input formControlName="name"></ion-input>
+											<br>
+											<span class="error ion-padding"
+												[class.show]="form.get('name')?.invalid && form.get('name')?.touched">
+												Informe seu nome.
+											</span>
+										</ion-col>
+									</ion-row>
+									<ion-row>
+										<ion-col class="ion-padding">
 											<ion-text class="simple-text">Email</ion-text>
 											<ion-input formControlName="email"></ion-input>
 											<br>
 											<span class="error ion-padding"
 												[class.show]="form.get('email')?.invalid && form.get('email')?.touched">
 												Informe um endereço de email válido.
+											</span>
+										</ion-col>
+									</ion-row>
+									<ion-row>
+										<ion-col class="ion-padding">
+											<ion-text class="simple-text">Telefone</ion-text>
+											<ion-input formControlName="phone"></ion-input>
+											<br>
+											<span class="error ion-padding"
+												[class.show]="form.get('phone')?.invalid && form.get('phone')?.touched">
+												Informe um número de telefone válido.
 											</span>
 										</ion-col>
 									</ion-row>
