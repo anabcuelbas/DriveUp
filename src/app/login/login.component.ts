@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
+import { Login } from '../models/login.model';
 import { ServicosService } from '../services/servicos.service';
 
 @Component({
@@ -32,19 +33,18 @@ export class LoginComponent implements OnInit {
 			return;
 		}
 
-		let login = { email: this.form.get('email').value, password: this.form.get('password').value };
 		// checa login e se usuário é empresa ou não
 		// this.servicosService.checkLogin(login).subscribe((item) => {});
+		let resp: Login = this.servicosService.verifyLogin(this.form.get('email').value, this.form.get('password').value);
 
-		let resp = { user: 'empresa', valid: true }; // esse user vamos receber do checkLogin do backend
-		if (resp.valid == false) {
-			this.presentAlert();
-		} else {
-			if (resp.user == 'empresa') {
+		if (resp) {
+			if (resp.empresa == true) {
 				this.router.navigate(['/home']); //trocar para rota de home da empresa (não vamos fazer a página em si)
 			} else {
 				this.router.navigate(['/home']);
 			}
+		} else {
+			this.presentAlert();
 		}
 	}
 
