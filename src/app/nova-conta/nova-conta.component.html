@@ -1,3 +1,64 @@
-<p>
-  nova-conta works!
-</p>
+<ion-content class="background">
+	<ion-grid>
+		<ion-row class="padding-top ion-justify-content-center">
+			<ion-card>
+				<form [formGroup]="form" (ngSubmit)="onSubmit()">
+					<ion-grid>
+						<ion-row>
+							<ion-col size="12">
+								<ion-grid>
+									<ion-row>
+										<ion-col class="ion-padding">
+											<ion-text class="secondary-text">Criar conta</ion-text>
+											<br><br><br><br>
+											<ion-text class="simple-text">Email</ion-text>
+											<ion-input formControlName="email"></ion-input>
+											<br>
+											<span class="error ion-padding"
+												[class.show]="form.get('email')?.invalid && form.get('email')?.touched">
+												Informe um endereço de email válido.
+											</span>
+										</ion-col>
+									</ion-row>
+									<ion-row>
+										<ion-col class="ion-padding">
+											<ion-text class="simple-text">Senha</ion-text>
+											<ion-input type="password" formControlName="password"></ion-input>
+											<br>
+											<span class="error ion-padding"
+												[class.show]="form.get('password')?.invalid && form.get('password')?.touched">
+												Informe uma senha válida.
+											</span>
+										</ion-col>
+									</ion-row>
+									<ion-row>
+										<ion-col class="ion-padding">
+											<ion-text class="simple-text">Confirmar senha</ion-text>
+											<ion-input type="password" formControlName="confirmPassword"></ion-input>
+											<br>
+											<span class="error ion-padding"
+												[class.show]="form.get('confirmPassword')?.invalid && form.get('confirmPassword')?.touched">
+												Confirme a senha.
+											</span>
+											<span class="error ion-padding" [class.show]="invalidPassword">
+												Confirmação de senha inválida
+											</span>
+										</ion-col>
+									</ion-row>
+									<ion-row>
+										<ion-col class="ion-padding">
+											<ion-button class="red ion-margin-bottom" type="submit">Cadastrar</ion-button>
+										</ion-col>
+									</ion-row>
+								</ion-grid>
+							</ion-col>
+						</ion-row>
+					</ion-grid>
+				</form>
+			</ion-card>
+			<!-- <div class="logo-background padding-top">
+				<img src="../../assets/imgs/driveUp.png">
+			</div> -->
+		</ion-row>
+	</ion-grid>
+</ion-content>
