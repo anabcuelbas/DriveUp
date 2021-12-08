@@ -1,8 +1,8 @@
-<ion-content>
+<ion-content class="background">
 	<ion-grid>
 		<ion-row class="padding-top ion-justify-content-center">
 			<ion-card>
-				<form>
+				<form [formGroup]="form" (ngSubmit)="onSubmit()">
 					<ion-grid>
 						<ion-row>
 							<ion-col size="12">
@@ -12,29 +12,30 @@
 											<ion-text class="secondary-text">Login</ion-text>
 											<br><br><br><br>
 											<ion-text class="simple-text">Email</ion-text>
-											<ion-input formControlName="nome"></ion-input>
+											<ion-input formControlName="email"></ion-input>
 											<br>
 											<span class="error ion-padding"
-												[class.show]="form.get('nome')?.invalid && form.get('nome')?.touched">
-												Informe o email correto.
+												[class.show]="form.get('email')?.invalid && form.get('email')?.touched">
+												Informe um endereço de email válido.
 											</span>
 										</ion-col>
 									</ion-row>
 									<ion-row>
 										<ion-col class="ion-padding">
 											<ion-text class="simple-text">Senha</ion-text>
-											<ion-input type="tel" formControlName="telefone"></ion-input>
+											<ion-input type="password" formControlName="password"></ion-input>
 											<br>
 											<span class="error ion-padding"
-												[class.show]="form.get('telefone')?.invalid && form.get('telefone')?.touched">
-												Senha inválida
+												[class.show]="form.get('password')?.invalid && form.get('password')?.touched">
+												Informe uma senha válida.
 											</span>
 										</ion-col>
 									</ion-row>
 									<ion-row>
 										<ion-col class="ion-padding">
 											<ion-button class="red ion-margin-bottom" type="submit">Entrar</ion-button>
-											<ion-text class="simple-text__nova-conta">Não tem conta? Cria uma
+											<ion-text class="simple-text__nova-conta" routerLink='/login/create-account'>Não tem conta? Crie
+												uma
 											</ion-text>
 										</ion-col>
 									</ion-row>
@@ -45,6 +46,9 @@
 
 				</form>
 			</ion-card>
+			<div class="logo-background padding-top">
+				<img src="../../assets/imgs/driveUp.png">
+			</div>
 		</ion-row>
 	</ion-grid>
 </ion-content>

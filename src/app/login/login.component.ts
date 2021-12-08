@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AlertController } from '@ionic/angular';
 import { ServicosService } from '../services/servicos.service';
 
 @Component({
@@ -11,7 +12,7 @@ import { ServicosService } from '../services/servicos.service';
 export class LoginComponent implements OnInit {
 	public form!: FormGroup;
 
-	constructor(private route: ActivatedRoute, private router: Router, private servicosService: ServicosService, private fb: FormBuilder) {}
+	constructor(private route: ActivatedRoute, private router: Router, private servicosService: ServicosService, private fb: FormBuilder, private alertController: AlertController) {}
 
 	ngOnInit() {
 		this.mountForm();
@@ -20,7 +21,7 @@ export class LoginComponent implements OnInit {
 	public mountForm(): void {
 		this.form = this.fb.group({
 			email: ['', Validators.compose([Validators.required, Validators.email])],
-			senha: ['', Validators.required],
+			password: ['', Validators.required],
 		});
 	}
 
@@ -31,15 +32,33 @@ export class LoginComponent implements OnInit {
 			return;
 		}
 
-		let login = { email: this.form.get('email').value, senha: this.form.get('senha').value };
-		// checa login e retorna se usuário é empresa ou não
+		let login = { email: this.form.get('email').value, password: this.form.get('password').value };
+		// checa login e se usuário é empresa ou não
 		// this.servicosService.checkLogin(login).subscribe((item) => {});
 
-		let user = 'empresa'; // esse user vamos receber do checkLogin do backend
-		if (user == 'empresa') {
-			this.router.navigate(['/home']); //trocar para rota de home da empresa (não vamos fazer a página em si)
+		let resp = { user: 'empresa', valid: true }; // esse user vamos receber do checkLogin do backend
+		if (resp.valid == false) {
+			this.presentAlert();
 		} else {
-			this.router.navigate(['/home']);
+			if (resp.user == 'empresa') {
+				this.router.navigate(['/home']); //trocar para rota de home da empresa (não vamos fazer a página em si)
+			} else {
+				this.router.navigate(['/home']);
+			}
 		}
+	}
+
+	public async presentAlert() {
+		const alert = await this.alertController.create({
+			cssClass: 'alert',
+			header: 'Login Inválido',
+			message: 'Seu email ou senha estão incorretos. Por favor tente novamente.',
+			buttons: ['OK'],
+		});
+
+		await alert.present();
+
+		const { role } = await alert.onDidDismiss();
+		console.log('onDidDismiss resolved with role', role);
 	}
 }

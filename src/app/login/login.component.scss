@@ -60,6 +60,13 @@ ion-card {
 	&__nova-conta {
 		color: #2467b6;
 		text-decoration: underline;
+		margin-left: 5px;
+	}
+	&__nova-conta:hover {
+		color: #2467b6;
+		text-decoration: underline;
+		opacity: 80%;
+		cursor: pointer;
 	}
 }
 
@@ -104,4 +111,28 @@ img {
 	--border-radius: 10px;
 	color: #000000;
 	--background: #f9f9f9;
+}
+
+::ng-deep .alert-title.sc-ion-alert-md {
+	color: #ba3b46 !important;
+	font-size: 20px;
+	font-weight: 500;
+	text-align: center;
+}
+
+ion-content.background {
+	--background: url(../../assets/imgs/image.png) 0 0/100% 100% no-repeat;
+}
+
+.ion-justify-content-center {
+	justify-content: flex-start;
+	margin: 100px 600px 100px 100px;
+}
+
+.logo-background {
+	margin: 10rem -30rem 0rem 10rem;
+	img {
+		width: 370px;
+		height: 100px;
+	}
 }
