@@ -10,15 +10,30 @@ const pool = new Pool({
 })
 
 const getUsuario = async (req, res) => {
-    const query = `
-        SELECT * 
-        FROM usuario
-        WHERE usuario.email IN (
-            SELECT perfil.email 
-            FROM  perfil
-            WHERE perfil.email = '${req.params.perfilEmail}' AND perfil.senha = '${req.params.perfilSenha}'
-        )
-    `;
+    const tipo = req.params.tipo;
+    let query;
+    
+    if (tipo == 'empresa') {
+        query = `
+            SELECT * 
+            FROM estabelecimento
+            WHERE estabelecimento.email IN (
+                SELECT perfil.email 
+                FROM  perfil
+                WHERE perfil.email = '${req.params.perfilEmail}' AND perfil.senha = '${req.params.perfilSenha}'
+            )
+        `;
+    } else if (tipo == 'usuario') {
+        query = `
+            SELECT * 
+            FROM usuario
+            WHERE usuario.email IN (
+                SELECT perfil.email 
+                FROM  perfil
+                WHERE perfil.email = '${req.params.perfilEmail}' AND perfil.senha = '${req.params.perfilSenha}'
+            )
+        `;
+    }
 
     const response = await pool.query(query, (err, result) => {
         if(err) {

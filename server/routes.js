@@ -20,7 +20,7 @@ router.get('/preco/:subServicoId/:tipoVeiculo', getPrecoSubServico);
 router.get('/reservas', getReservas);
 router.post('/reserva', addReserva);
 
-router.get('/usuario', getUsuario);
+router.get('/verificar-login', getUsuario);
 router.post('/cadastrar', createUsuario);
 router.post('/atualizar-usuario', updateUsuario);
 router.post('/atualizar-estabelecimento', updateEstabelecimento);
