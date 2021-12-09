@@ -11,7 +11,7 @@ const pool = new Pool({
 
 const getUsuario = async (req, res) => {
     const tipo = req.params.tipo;
-    let query;
+    let query = ``;
     
     if (tipo == 'empresa') {
         query = `
@@ -58,7 +58,7 @@ const createUsuario = async (req, res) => {
     let dia = req.body.diasFuncionamento;
     let imagem = req.body.img;
 
-    let query;
+    let query = ``;
 
     if (tipo == 'empresa') {
         query = "INSERT INTO estabelecimento (Nome,  Endereco, HoraFuncionamento, DiasFuncionamento, image_url) VALUES ('" + nomeEmpresa + "', '"  + endereco + "', '" + hora + "', '" + dia + "', '" + imagem + "'); INSERT INTO perfil (email,  senha) VALUES ('" + email + "', '"  + senha + "');"
