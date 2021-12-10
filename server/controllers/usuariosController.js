@@ -61,9 +61,21 @@ const createUsuario = async (req, res) => {
     let query = ``;
 
     if (tipo == 'empresa') {
-        query = "INSERT INTO estabelecimento (nome,  endereco, horaFuncionamento, diasFuncionamento, email, image_url) VALUES ('" + nomeEmpresa + "', '"  + endereco + "', '" + hora + "', '" + dia + "', '" + email + "', '" + imagem + "'); INSERT INTO perfil (email,  senha, tipo) VALUES ('" + email + "', '" + senha + "', '" + tipo + "');"
+        query = `
+            INSERT INTO estabelecimento (nome, endereco, horaFuncionamento, diasFuncionamento, image_url, email)
+            VALUES ('${nomeEmpresa}', '${endereco}', '${hora}', '${dia}', '${imagem}', '${email}');
+
+            INSERT INTO perfil (email, senha, tipo)
+            VALUES ('${email}', '${senha}', '${tipo}');
+        `;
     } else if (tipo == 'usuario') {
-        query = "INSERT INTO usuario (nome,  telefone, email) VALUES ('" + nomeUsuario + "', '"  + telefone + "', '" + email + "'); INSERT INTO perfil (email,  senha, tipo) VALUES ('" + email + "', '" + senha + "', '" + tipo + "');"
+        query = `
+            INSERT INTO usuario (nome, telefone, email)
+            VALUES ('${nomeUsuario}', '${telefone}', '${email}');
+
+            INSERT INTO perfil (email, senha, tipo)
+            VALUES ('${email}', '${senha}', '${tipo}');
+        `;
     }
 
     const response = await pool.query(query, async(err, result) => {
