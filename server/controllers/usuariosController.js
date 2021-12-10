@@ -62,7 +62,7 @@ const createUsuario = async (req, res) => {
 
     if (tipo == 'empresa') {
         query = `
-            INSERT INTO estabelecimento (nome, endereco, horaFuncionamento, diasFuncionamento, image_url, email)
+            INSERT INTO estabelecimento (nome, endereco, horaFuncionamento, diasFuncionamento, imagemurl, email)
             VALUES ('${nomeEmpresa}', '${endereco}', '${hora}', '${dia}', '${imagem}', '${email}');
 
             INSERT INTO perfil (email, senha, tipo)
@@ -117,7 +117,7 @@ const updateEstabelecimento = async (req, res) => {
 
     const query = `
         UPDATE estabelecimento
-        SET nome = '${nome}', endereco = '${endereco}', horaFuncionamento = '${hora}', diasFuncionamento = '${dia}', image_url = '${imagem}'
+        SET nome = '${nome}', endereco = '${endereco}', horafuncionamento = '${hora}', diasfuncionamento = '${dia}', imagemurl = '${imagem}'
         WHERE estabelecimento.email = '${email}'
     `;
 
