@@ -163,11 +163,11 @@ export class ServicosService {
 		if (email == 'laura@usp.br' && senha == '123') {
 			return {
 				usuario: {
-					nome: 'Usuário',
+					nomeUsuario: 'Usuário',
 					email: 'laura@usp.br',
 					telefone: '11 99428-2377',
 				},
-				empresa: false,
+				tipo: 'usuario',
 			};
 		}
 	}
@@ -179,4 +179,8 @@ export class ServicosService {
 	public updateUser(user: Usuario): Usuario {
 		return user;
 	}
+
+	// public addUsuario(cadastro: Cadastro): void {
+	// 	this.http.post<Cadastro>(`${environment.apiUrl}/adiciona-usuario`);
+	// }
 }

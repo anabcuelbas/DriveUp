@@ -23,7 +23,7 @@ export class PerfilComponent implements OnInit {
 
 	public mountForm(): void {
 		this.form = this.fb.group({
-			nome: [this.user.nome, Validators.required],
+			nome: [this.user.nomeUsuario, Validators.required],
 			email: [this.user.email, Validators.compose([Validators.required, Validators.email])],
 			telefone: [this.user.telefone, Validators.required],
 		});
@@ -55,7 +55,7 @@ export class PerfilComponent implements OnInit {
 		}
 
 		let newUser: Usuario = {
-			nome: this.form.get('nome').value,
+			nomeUsuario: this.form.get('nome').value,
 			email: this.user.email,
 			telefone: this.form.get('telefone').value,
 		};

@@ -38,7 +38,7 @@ export class LoginComponent implements OnInit {
 		let resp: Login = this.servicosService.verifyLogin(this.form.get('email').value, this.form.get('password').value);
 
 		if (resp) {
-			if (resp.empresa == true) {
+			if (resp.tipo == 'empresa') {
 				this.router.navigate(['/home']); //trocar para rota de home da empresa (não vamos fazer a página em si)
 			} else {
 				this.router.navigate(['/home']);

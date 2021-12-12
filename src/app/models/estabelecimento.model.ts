@@ -1,5 +1,5 @@
 export interface Estabelecimento {
-	id: string;
+	id?: string;
 	nome: string;
 	horafuncionamento: string;
 	diasfuncionamento: string;
