@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
+import { Cadastro } from '../models/cadastro.model';
+import { ServicosService } from '../services/servicos.service';
 
 @Component({
 	selector: 'app-nova-conta',
@@ -11,8 +13,10 @@ import { AlertController } from '@ionic/angular';
 export class NovaContaComponent implements OnInit {
 	public form!: FormGroup;
 	public invalidPassword = false;
+	public cadastro: Cadastro;
+	public tipo = '';
 
-	constructor(private fb: FormBuilder, private alertController: AlertController, private router: Router) {}
+	constructor(private fb: FormBuilder, private alertController: AlertController, private router: Router, private service: ServicosService) {}
 
 	ngOnInit() {
 		this.mountForm();
@@ -20,25 +24,39 @@ export class NovaContaComponent implements OnInit {
 
 	public mountForm(): void {
 		this.form = this.fb.group({
-			name: ['', Validators.required],
-			email: ['', Validators.compose([Validators.required, Validators.email])],
-			phone: ['', Validators.compose([Validators.required, Validators.minLength(11)])],
-			password: ['', Validators.required],
-			confirmPassword: ['', Validators.required],
+			usuario: this.fb.group({
+				nomeUsuario: ['', Validators.required],
+				email: ['', Validators.compose([Validators.required, Validators.email])],
+				telefone: ['', Validators.compose([Validators.required, Validators.minLength(11)])],
+			}),
+			empresa: this.fb.group({
+				nomeEmpresa: ['', Validators.required],
+				horafuncionamento: ['', Validators.required],
+				diasfuncionamento: ['', Validators.required],
+				endereco: ['', Validators.required],
+				img: ['', Validators.required],
+			}),
+			tipo: ['', Validators.required],
+			senha: ['', Validators.required],
+			confirmarSenha: ['', Validators.required],
 		});
 	}
 
 	public onSubmit(): void {
 		this.form.markAllAsTouched();
 
-		if (this.form.invalid) {
+		if ((this.tipo == 'usuario' && this.form.get('usuario').invalid) || (this.tipo == 'empresa' && this.form.get('empresa').invalid)) {
+			console.log('retornou essa merda');
 			return;
 		}
 
-		if (this.form.get('password').value != this.form.get('confirmPassword').value) {
+		if (this.form.get('senha').value != this.form.get('confirmarSenha').value) {
 			this.invalidPassword = true;
+			this.mountForm();
 		} else {
-			// chamar service para passar os dados para o back
+			this.cadastro = this.form.value;
+			//chamar service para passar os dados de cadastro para o back
+			console.log('Cadastro: ', this.cadastro);
 			this.presentAlert();
 		}
 	}
@@ -56,5 +74,9 @@ export class NovaContaComponent implements OnInit {
 		const { role } = await alert.onDidDismiss();
 		this.router.navigate(['/login']);
 		console.log('onDidDismiss resolved with role', role);
+	}
+
+	public getType(): void {
+		this.tipo = this.form.get('tipo').value;
 	}
 }
