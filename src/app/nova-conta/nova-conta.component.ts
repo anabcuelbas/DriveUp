@@ -46,7 +46,6 @@ export class NovaContaComponent implements OnInit {
 		this.form.markAllAsTouched();
 
 		if ((this.tipo == 'usuario' && this.form.get('usuario').invalid) || (this.tipo == 'empresa' && this.form.get('empresa').invalid)) {
-			console.log('retornou essa merda');
 			return;
 		}
 
