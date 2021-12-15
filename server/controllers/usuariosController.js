@@ -15,7 +15,7 @@ const getUsuario = async (req, res) => {
     
     if (tipo == 'empresa') {
         query = `
-            SELECT nome, endereco, horafuncionamento, diasfuncionamento, email, imagemUrl AS img
+            SELECT id, nome, endereco, horafuncionamento, diasfuncionamento, email, imagemUrl AS img
             FROM estabelecimento
             WHERE estabelecimento.email IN (
                 SELECT perfil.email 
