@@ -3,8 +3,8 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { Agendamento } from '../models/agendamento.model';
+import { Cadastro } from '../models/cadastro.model';
 import { Estabelecimento } from '../models/estabelecimento.model';
-import { Login } from '../models/login.model';
 import { Servico } from '../models/servico.model';
 import { Usuario } from '../models/usuario.model';
 
@@ -139,8 +139,16 @@ export class ServicosService {
 		return this.http.get<any>(`${environment.apiUrl}/oferta-servicos/${id}`);
 	}
 
+	public getAllEstabelecimentos(): Observable<any> {
+		return this.http.get<any>(`${environment.apiUrl}/estabelecimentos`);
+	}
+
 	public getSubtipoByServicoAndEstabelecimentoID(servicoId: string, estabelecimentoId: string): Observable<any> {
 		return this.http.get<any>(`${environment.apiUrl}/sub-servicos/${servicoId}/${estabelecimentoId}`);
+	}
+
+	public getServicoByID(id: string): Observable<any> {
+		return this.http.get<any>(`${environment.apiUrl}/servico/${id}`);
 	}
 
 	public getPrecoByVeiculoAndSubServicoID(subTipoId: string, veiculo: string): Observable<any> {
@@ -155,28 +163,46 @@ export class ServicosService {
 		return this.http.post<any>(`${environment.apiUrl}/reserva`, reserva);
 	}
 
-	// public verifyLogin(email: string, senha: string): Observable<Login> {
-	// 	return this.http.get<Login>(`${environment.apiUrl}/verifica-login/${id}`);
-	// }
-
-	public verifyLogin(email: string, senha: string): Login {
-		if (email == 'laura@usp.br' && senha == '123') {
-			return {
-				usuario: {
-					nome: 'Usuário',
-					email: 'laura@usp.br',
-					telefone: '11 99428-2377',
-				},
-				empresa: false,
-			};
-		}
+	public getReservas(): Observable<any> {
+		return this.http.get<any>(`${environment.apiUrl}/reservas`);
 	}
 
-	// public updateUser(user: Usuario, id: string): Observable<Usuario> {
-	// 	return this.http.put<Usuario>(`${environment.apiUrl}/atualiza-usuario/${id}`);
+	public cadastrarNovoUsuario(user: Cadastro): Observable<any> {
+		return this.http.post<any>(`${environment.apiUrl}/cadastrar`, user);
+	}
+
+	public updateEstabelecimento(estabelecimento: Estabelecimento): Observable<any> {
+		console.log('updateUser ', estabelecimento);
+		return this.http.post<any>(`${environment.apiUrl}/cadastrar`, estabelecimento);
+	}
+
+	public updateUser(user: Usuario): Observable<any> {
+		console.log('updateUser ', user);
+		return this.http.post<Usuario>(`${environment.apiUrl}/atualizar-usuario`, user);
+	}
+
+	public verifyLogin(tipo: string, email: string, senha: string): Observable<Usuario | Estabelecimento> {
+		return this.http.get<Usuario | Estabelecimento>(`${environment.apiUrl}/verificar-login/${tipo}/${email}/${senha}`);
+	}
+
+	// public verifyLogin(email: string, senha: string): Login {
+	// 	if (email == 'laura@usp.br' && senha == '123') {
+	// 		return {
+	// 			usuario: {
+	// 				nomeUsuario: 'Usuário',
+	// 				email: 'laura@usp.br',
+	// 				telefone: '11 99428-2377',
+	// 			},
+	// 			tipo: 'usuario',
+	// 		};
+	// 	}
 	// }
 
-	public updateUser(user: Usuario): Usuario {
-		return user;
-	}
+	// public updateUser(user: Usuario): Usuario {
+	// 	return user;
+	// }
+
+	// public addUsuario(cadastro: Cadastro): void {
+	// 	this.http.post<Cadastro>(`${environment.apiUrl}/adiciona-usuario`);
+	// }
 }

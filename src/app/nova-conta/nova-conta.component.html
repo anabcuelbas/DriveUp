@@ -1,5 +1,5 @@
 <ion-content class="background">
-	<ion-grid>
+	<ion-grid [ngClass]="{'empresa': tipo == 'empresa', 'usuario': tipo == 'usuario', 'nulo': tipo == ''}">
 		<ion-row class="padding-top ion-justify-content-center">
 			<ion-card>
 				<form [formGroup]="form" (ngSubmit)="onSubmit()">
@@ -11,62 +11,148 @@
 										<ion-col class="ion-padding">
 											<ion-text class="secondary-text">Criar conta</ion-text>
 											<br><br><br><br>
-											<ion-text class="simple-text">Nome</ion-text>
-											<ion-input formControlName="name"></ion-input>
-											<br>
-											<span class="error ion-padding"
-												[class.show]="form.get('name')?.invalid && form.get('name')?.touched">
-												Informe seu nome.
+											<ion-text class="simple-text select">Selecione o tipo de usuário</ion-text>
+											<ion-select formControlName="tipo" (ionChange)="getType()">
+												<ion-select-option value="empresa">Prestador de Serviço</ion-select-option>
+												<ion-select-option value="usuario">Contratador de Serviço
+												</ion-select-option>
+											</ion-select>
+											<span class="error" [class.show]="form.get('tipo')?.invalid &&
+											form.get('tipo')?.touched">
+												Selecione um tipo de usuário.
 											</span>
 										</ion-col>
 									</ion-row>
-									<ion-row>
-										<ion-col class="ion-padding">
-											<ion-text class="simple-text">Email</ion-text>
-											<ion-input formControlName="email"></ion-input>
-											<br>
-											<span class="error ion-padding"
-												[class.show]="form.get('email')?.invalid && form.get('email')?.touched">
-												Informe um endereço de email válido.
-											</span>
-										</ion-col>
-									</ion-row>
-									<ion-row>
-										<ion-col class="ion-padding">
-											<ion-text class="simple-text">Telefone</ion-text>
-											<ion-input formControlName="phone"></ion-input>
-											<br>
-											<span class="error ion-padding"
-												[class.show]="form.get('phone')?.invalid && form.get('phone')?.touched">
-												Informe um número de telefone válido.
-											</span>
-										</ion-col>
-									</ion-row>
+
+									<ng-container *ngIf="tipo == 'empresa'" formGroupName="empresa" class="empresa">
+										<ion-row>
+											<ion-col class="ion-padding">
+												<ion-text class="simple-text">Nome</ion-text>
+												<ion-input formControlName="nomeEmpresa" placeholder="Nome" required></ion-input>
+												<span class="error" [class.show]="form.get('empresa')?.get('nomeEmpresa')?.invalid &&
+												form.get('empresa')?.get('nomeEmpresa')?.touched">
+													Informe um nome válido.
+												</span>
+											</ion-col>
+										</ion-row>
+
+										<ion-row>
+											<ion-col class="ion-padding">
+												<ion-text class="simple-text">Email</ion-text>
+												<ion-input formControlName="emailEmpresa" placeholder="Email"></ion-input>
+												<span class="error" [class.show]="form.get('empresa')?.get('emailEmpresa')?.invalid &&
+												form.get('empresa')?.get('emailEmpresa')?.touched">
+													Informe um email válido.
+												</span>
+											</ion-col>
+										</ion-row>
+
+										<ion-row>
+											<ion-col class="ion-padding">
+												<ion-text class="simple-text">Horário de funcionamento</ion-text>
+												<ion-input formControlName="horafuncionamento" placeholder="Horário de funcionamento" required>
+												</ion-input>
+												<span class="error" [class.show]="form.get('empresa')?.get('horafuncionamento')?.invalid &&
+												form.get('empresa')?.get('horafuncionamento')?.touched">
+													Informe um horário válido.
+												</span>
+											</ion-col>
+										</ion-row>
+
+										<ion-row>
+											<ion-col class="ion-padding">
+												<ion-text class="simple-text">Dias de funcionamento</ion-text>
+												<ion-input formControlName="diasfuncionamento" placeholder="Dias de funcionamento" required>
+												</ion-input>
+												<span class="error" [class.show]="form.get('empresa')?.get('diasfuncionamento')?.invalid &&
+												form.get('empresa')?.get('diasfuncionamento')?.touched">
+													Informe um período de funcionamento válido.
+												</span>
+											</ion-col>
+										</ion-row>
+
+										<ion-row>
+											<ion-col class="ion-padding">
+												<ion-text class="simple-text">Endereço</ion-text>
+												<ion-input formControlName="endereco" placeholder="Endereço" required></ion-input>
+												<span class="error" [class.show]="form.get('empresa')?.get('endereco')?.invalid &&
+												form.get('empresa')?.get('endereco')?.touched">
+													Informe um endereço válido.
+												</span>
+											</ion-col>
+										</ion-row>
+
+										<ion-row>
+											<ion-col class="ion-padding">
+												<ion-text class="simple-text">URL da imagem</ion-text>
+												<ion-input formControlName="img" placeholder="URL"></ion-input>
+											</ion-col>
+										</ion-row>
+									</ng-container>
+
+									<ng-container *ngIf="tipo == 'usuario'" formGroupName="usuario">
+										<ion-row>
+											<ion-col class="ion-padding">
+												<ion-text class="simple-text">Nome</ion-text>
+												<ion-input formControlName="nomeUsuario" placeholder="Nome" required></ion-input>
+												<span class="error" [class.show]="form.get('usuario')?.get('nomeUsuario')?.invalid &&
+												form.get('usuario')?.get('nomeUsuario')?.touched">
+													Informe um nome válido.
+												</span>
+											</ion-col>
+										</ion-row>
+
+										<ion-row>
+											<ion-col class="ion-padding">
+												<ion-text class="simple-text">Email</ion-text>
+												<ion-input formControlName="email" placeholder="Email"></ion-input>
+												<span class="error" [class.show]="form.get('usuario')?.get('email')?.invalid &&
+												form.get('usuario')?.get('email')?.touched">
+													Informe um email válido.
+												</span>
+											</ion-col>
+										</ion-row>
+
+										<ion-row>
+											<ion-col class="ion-padding">
+												<ion-text class="simple-text">Telefone</ion-text>
+												<ion-input formControlName="telefone" placeholder="Telefone"></ion-input>
+												<span class="error" [class.show]="form.get('usuario')?.get('telefone')?.invalid &&
+												form.get('usuario')?.get('telefone')?.touched">
+													Informe um número de telefone válido.
+												</span>
+											</ion-col>
+										</ion-row>
+									</ng-container>
+
 									<ion-row>
 										<ion-col class="ion-padding">
 											<ion-text class="simple-text">Senha</ion-text>
-											<ion-input type="password" formControlName="password"></ion-input>
+											<ion-input type="password" formControlName="senha"></ion-input>
 											<br>
-											<span class="error ion-padding"
-												[class.show]="form.get('password')?.invalid && form.get('password')?.touched">
+											<span *ngIf="form.get('senha')?.invalid && form.get('senha')?.touched" class="error ion-padding"
+												[class.show]="form.get('senha')?.invalid && form.get('senha')?.touched">
 												Informe uma senha válida.
 											</span>
 										</ion-col>
 									</ion-row>
+
 									<ion-row>
 										<ion-col class="ion-padding">
 											<ion-text class="simple-text">Confirmar senha</ion-text>
-											<ion-input type="password" formControlName="confirmPassword"></ion-input>
+											<ion-input type="password" formControlName="confirmarSenha"></ion-input>
 											<br>
-											<span class="error ion-padding"
-												[class.show]="form.get('confirmPassword')?.invalid && form.get('confirmPassword')?.touched">
+											<span *ngIf="form.get('confirmarSenha')?.invalid && form.get('confirmarSenha')?.touched"
+												class="error ion-padding"
+												[class.show]="form.get('confirmarSenha')?.invalid && form.get('confirmarSenha')?.touched">
 												Confirme a senha.
 											</span>
-											<span class="error ion-padding" [class.show]="invalidPassword">
+											<span *ngIf="invalidPassword" class="error ion-padding" [class.show]="invalidPassword">
 												Confirmação de senha inválida
 											</span>
 										</ion-col>
 									</ion-row>
+
 									<ion-row>
 										<ion-col class="ion-padding">
 											<ion-button class="red ion-margin-bottom" type="submit">Cadastrar</ion-button>
@@ -78,9 +164,6 @@
 					</ion-grid>
 				</form>
 			</ion-card>
-			<!-- <div class="logo-background padding-top">
-				<img src="../../assets/imgs/driveUp.png">
-			</div> -->
 		</ion-row>
 	</ion-grid>
 </ion-content>

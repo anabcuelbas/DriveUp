@@ -45,36 +45,37 @@ const getUsuario = async (req, res) => {
 }
 
 const createUsuario = async (req, res) => {
-    let email = req.body.email;
+    let emailUsuario = req.body.usuario.email;
     let senha = req.body.senha;
     let tipo = req.body.tipo;
 
-    let telefone = req.body.telefone;
-    let nomeUsuario = req.body.nomeUsuario;
+    let telefone = req.body.usuario.telefone;
+    let nomeUsuario = req.body.usuario.nomeUsuario;
 
-    let nomeEmpresa = req.body.nomeEmpresa;
-    let endereco = req.body.endereco;
-    let hora = req.body.horaFuncionamento;
-    let dia = req.body.diasFuncionamento;
-    let imagem = req.body.img;
+    let nomeEmpresa = req.body.empresa.nomeEmpresa;
+    let endereco = req.body.empresa.endereco;
+    let hora = req.body.empresa.horafuncionamento;
+    let dia = req.body.empresa.diasfuncionamento;
+    let imagem = req.body.empresa.img;
+		let emailEmpresa = req.body.empresa.email;
 
     let query = ``;
 
     if (tipo == 'empresa') {
         query = `
-            INSERT INTO estabelecimento (nome, endereco, horaFuncionamento, diasFuncionamento, imagemurl, email)
-            VALUES ('${nomeEmpresa}', '${endereco}', '${hora}', '${dia}', '${imagem}', '${email}');
+            INSERT INTO estabelecimento (nome, endereco, horafuncionamento, diasfuncionamento, imagemurl, email)
+            VALUES ('${nomeEmpresa}', '${endereco}', '${hora}', '${dia}', '${imagem}', '${emailEmpresa}');
 
             INSERT INTO perfil (email, senha, tipo)
-            VALUES ('${email}', '${senha}', '${tipo}');
+            VALUES ('${emailEmpresa}', '${senha}', '${tipo}');
         `;
     } else if (tipo == 'usuario') {
         query = `
             INSERT INTO usuario (nome, telefone, email)
-            VALUES ('${nomeUsuario}', '${telefone}', '${email}');
+            VALUES ('${nomeUsuario}', '${telefone}', '${emailUsuario}');
 
             INSERT INTO perfil (email, senha, tipo)
-            VALUES ('${email}', '${senha}', '${tipo}');
+            VALUES ('${emailUsuario}', '${senha}', '${tipo}');
         `;
     }
 

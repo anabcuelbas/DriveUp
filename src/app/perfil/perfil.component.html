@@ -1,6 +1,6 @@
 <app-header></app-header>
 <ion-content class="background">
-	<ion-grid>
+	<ion-grid *ngIf="user" class="user">
 		<ion-row class="padding-top ion-justify-content-center">
 			<ion-card>
 				<form [formGroup]="form" (ngSubmit)="onSubmit()">
@@ -46,6 +46,97 @@
 									<ion-row>
 										<ion-col class="ion-padding">
 											<ion-button *ngIf="!isEditing" class="red ion-margin-bottom" (click)="editProfile()">Editar
+											</ion-button>
+											<ion-button *ngIf="!isEditing" class="black ion-margin-bottom" (click)="logout()">Sair
+											</ion-button>
+											<ion-button *ngIf="isEditing" class="green ion-margin-bottom" type="submit">Salvar
+											</ion-button>
+											<ion-button *ngIf="isEditing" class="blue ion-margin-bottom" (click)="cancel()">Cancelar
+											</ion-button>
+										</ion-col>
+									</ion-row>
+								</ion-grid>
+							</ion-col>
+						</ion-row>
+					</ion-grid>
+				</form>
+			</ion-card>
+		</ion-row>
+	</ion-grid>
+
+
+	<ion-grid *ngIf="empresa" class="empresa">
+		<ion-row class="padding-top ion-justify-content-center">
+			<ion-card>
+				<form [formGroup]="form" (ngSubmit)="onSubmit()">
+					<ion-grid>
+						<ion-row>
+							<ion-col size="12">
+								<ion-grid>
+									<ion-text class="ion-padding  secondary-text">Dados do perfil</ion-text>
+									<ion-row>
+										<ion-col class="ion-padding">
+											<ion-text class="simple-text">Nome</ion-text>
+											<ion-input formControlName="nome" [disabled]="!isEditing"></ion-input>
+											<br>
+											<span class="error ion-padding"
+												[class.show]="form.get('nome')?.invalid && form.get('nome')?.touched">
+												Informe o nome do estabelecimento.
+											</span>
+										</ion-col>
+
+										<ion-col class="ion-padding">
+											<ion-text class="simple-text">Email</ion-text>
+											<ion-input type="email" formControlName="email" disabled="true"></ion-input>
+											<br>
+											<span class="error ion-padding"
+												[class.show]="form.get('email')?.invalid && form.get('email')?.touched">
+												Informe um email válido.
+											</span>
+										</ion-col>
+									</ion-row>
+									<ion-row>
+										<ion-col class="ion-padding">
+											<ion-text class="simple-text">Dias de funcionamento</ion-text>
+											<ion-input type="phone" formControlName="diasfuncionamento" [disabled]="!isEditing"></ion-input>
+											<br>
+											<span class="error ion-padding"
+												[class.show]="form.get('diasfuncionamento')?.invalid && form.get('diasfuncionamento')?.touched">
+												Informe um período válido.
+											</span>
+										</ion-col>
+
+										<ion-col class="ion-padding">
+											<ion-text class="simple-text">Horário de funcionamento</ion-text>
+											<ion-input type="phone" formControlName="horafuncionamento" [disabled]="!isEditing"></ion-input>
+											<br>
+											<span class="error ion-padding"
+												[class.show]="form.get('horafuncionamento')?.invalid && form.get('horafuncionamento')?.touched">
+												Informe um período válido.
+											</span>
+										</ion-col>
+									</ion-row>
+									<ion-row>
+										<ion-col class="ion-padding">
+											<ion-text class="simple-text">URL da imagem</ion-text>
+											<ion-input type="phone" formControlName="img" [disabled]="!isEditing"></ion-input>
+										</ion-col>
+
+										<ion-col class="ion-padding">
+											<ion-text class="simple-text">Endereço</ion-text>
+											<ion-input type="phone" formControlName="endereco" [disabled]="!isEditing"></ion-input>
+											<br>
+											<span class="error ion-padding"
+												[class.show]="form.get('endereco')?.invalid && form.get('endereco')?.touched">
+												Informe um endereço válido.
+											</span>
+										</ion-col>
+									</ion-row>
+									<ion-row>
+										<ion-col class="ion-padding">
+											<ion-button *ngIf="!isEditing" class="red ion-margin-bottom" (click)="editProfile()">Editar
+											</ion-button>
+											<ion-button *ngIf="!isEditing" class="black ion-margin-bottom" (click)="logout()">Sair
 											</ion-button>
 											<ion-button *ngIf="isEditing" class="green ion-margin-bottom" type="submit">Salvar
 											</ion-button>
