@@ -28,10 +28,21 @@
 										<ion-row>
 											<ion-col class="ion-padding">
 												<ion-text class="simple-text">Nome</ion-text>
-												<ion-input formControlName="nomeEmpresa" placeholder="nome" required></ion-input>
+												<ion-input formControlName="nomeEmpresa" placeholder="Nome" required></ion-input>
 												<span class="error" [class.show]="form.get('empresa')?.get('nomeEmpresa')?.invalid &&
 												form.get('empresa')?.get('nomeEmpresa')?.touched">
 													Informe um nome válido.
+												</span>
+											</ion-col>
+										</ion-row>
+
+										<ion-row>
+											<ion-col class="ion-padding">
+												<ion-text class="simple-text">Email</ion-text>
+												<ion-input formControlName="emailEmpresa" placeholder="Email"></ion-input>
+												<span class="error" [class.show]="form.get('empresa')?.get('emailEmpresa')?.invalid &&
+												form.get('empresa')?.get('emailEmpresa')?.touched">
+													Informe um email válido.
 												</span>
 											</ion-col>
 										</ion-row>

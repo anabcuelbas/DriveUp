@@ -35,6 +35,7 @@ export class NovaContaComponent implements OnInit {
 				diasfuncionamento: ['', Validators.required],
 				endereco: ['', Validators.required],
 				img: ['', Validators.required],
+				emailEmpresa: ['', Validators.compose([Validators.required, Validators.email])],
 			}),
 			tipo: ['', Validators.required],
 			senha: ['', Validators.required],
