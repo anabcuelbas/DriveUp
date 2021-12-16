@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Login } from '../models/login.model';
+import { Estabelecimento } from '../models/estabelecimento.model';
 import { Usuario } from '../models/usuario.model';
+import { LocalStorageService } from '../services/local-storage.service';
 import { ServicosService } from '../services/servicos.service';
 
 @Component({
@@ -13,15 +14,17 @@ import { ServicosService } from '../services/servicos.service';
 export class PerfilComponent implements OnInit {
 	public form!: FormGroup;
 	public user: Usuario;
+	public empresa: Estabelecimento;
 	public isEditing = false;
+	public localStorageResponse = this.localStorageService.getItem('usuario');
 
-	constructor(private fb: FormBuilder, private router: Router, private service: ServicosService) {}
+	constructor(private fb: FormBuilder, private router: Router, private service: ServicosService, private localStorageService: LocalStorageService) {}
 
 	ngOnInit() {
 		this.getUserByID();
 	}
 
-	public mountForm(): void {
+	public mountUserForm(): void {
 		this.form = this.fb.group({
 			nome: [this.user.nomeUsuario, Validators.required],
 			email: [this.user.email, Validators.compose([Validators.required, Validators.email])],
@@ -29,18 +32,31 @@ export class PerfilComponent implements OnInit {
 		});
 	}
 
+	public mountEmpresaForm(): void {
+		this.form = this.fb.group({
+			nome: [this.empresa.nome, Validators.required],
+			email: [this.empresa.email, Validators.compose([Validators.required, Validators.email])],
+			horafuncionamento: [this.empresa.horafuncionamento, Validators.required],
+			diasfuncionamento: [this.empresa.diasfuncionamento, Validators.required],
+			endereco: [this.empresa.endereco, Validators.required],
+			img: [this.empresa.img],
+		});
+	}
+
 	public getUserByID(): void {
-		let resp: Login = this.service.verifyLogin('laura@usp.br', '123');
-		if (resp) {
-			this.user = resp.usuario;
-			console.log('RESP: ', resp);
+		if (this.localStorageResponse?.type == 'usuario') {
+			this.user = this.localStorageResponse?.user;
+			this.mountUserForm();
+		} else {
+			this.empresa = this.localStorageResponse?.user;
+			this.mountEmpresaForm();
 		}
-		this.mountForm();
 	}
 
 	public cancel(): void {
 		this.isEditing = !this.isEditing;
-		this.mountForm();
+		this.user && this.mountUserForm();
+		this.empresa && this.mountEmpresaForm();
 	}
 
 	public editProfile(): void {
@@ -54,15 +70,31 @@ export class PerfilComponent implements OnInit {
 			return;
 		}
 
-		let newUser: Usuario = {
-			nomeUsuario: this.form.get('nome').value,
-			email: this.user.email,
-			telefone: this.form.get('telefone').value,
-		};
+		this.user &&
+			this.service.updateUser(this.form.value).subscribe(
+				(item) => {
+					console.log('Update User: ', item);
+				},
+				(err) => {
+					console.log('ERRO: ', err);
+				}
+			);
+		this.empresa &&
+			this.service.updateEstabelecimento(this.form.value).subscribe(
+				(item) => {
+					console.log('Update Empresa: ', item);
+				},
+				(err) => {
+					console.log('ERRO: ', err);
+				}
+			);
 
-		this.user = this.service.updateUser(newUser);
 		this.editProfile();
-		this.mountForm();
-		console.log(this.user);
+		this.user && this.mountUserForm();
+		this.empresa && this.mountEmpresaForm();
+	}
+
+	public logout() {
+		this.router.navigate(['/login']);
 	}
 }

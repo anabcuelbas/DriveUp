@@ -11,11 +11,29 @@ ion-img {
 	width: 150px;
 }
 
-ion-card {
-	width: 500px;
-	height: 650px;
-	box-shadow: 0px 8px 10px 1px #00000024;
-	justify-content: center;
+.user {
+	ion-card {
+		width: 500px;
+		height: 650px;
+		box-shadow: 0px 8px 10px 1px #00000024;
+		justify-content: center;
+	}
+	.black {
+		width: 30%;
+		height: 50px;
+		margin-left: 19.5rem;
+		--border-radius: 10px;
+		--background: black;
+	}
+}
+
+.empresa {
+	ion-card {
+		width: 800px;
+		height: 610px;
+		box-shadow: 0px 8px 10px 1px #00000024;
+		justify-content: center;
+	}
 }
 
 .align-middle {
@@ -87,6 +105,14 @@ ion-select {
 	height: 50px;
 	--border-radius: 10px;
 	--background: #ba3b46;
+}
+
+.black {
+	width: 30%;
+	height: 50px;
+	margin-left: 32.5rem;
+	--border-radius: 10px;
+	--background: black;
 }
 
 .green {

@@ -5,4 +5,5 @@ export interface Estabelecimento {
 	diasfuncionamento: string;
 	endereco: string;
 	img: string;
+	email: string;
 }
