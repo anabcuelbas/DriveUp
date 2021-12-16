@@ -120,6 +120,11 @@ img {
 	text-align: justify;
 }
 
+.check {
+	align-items: baseline;
+	justify-content: center;
+}
+
 ion-content.background {
 	--background: url(../../assets/imgs/image.png) 0 0/100% 100% no-repeat;
 }

@@ -14,7 +14,7 @@
 											<ion-text class="simple-text">Email</ion-text>
 											<ion-input formControlName="email"></ion-input>
 											<br>
-											<span class="error ion-padding"
+											<span *ngIf="form.get('email')?.invalid && form.get('email')?.touched" class="error ion-padding"
 												[class.show]="form.get('email')?.invalid && form.get('email')?.touched">
 												Informe um endereço de email válido.
 											</span>
@@ -25,10 +25,19 @@
 											<ion-text class="simple-text">Senha</ion-text>
 											<ion-input type="password" formControlName="password"></ion-input>
 											<br>
-											<span class="error ion-padding"
+											<span *ngIf="form.get('password')?.invalid && form.get('password')?.touched"
+												class="error ion-padding"
 												[class.show]="form.get('password')?.invalid && form.get('password')?.touched">
 												Informe uma senha válida.
 											</span>
+										</ion-col>
+									</ion-row>
+									<ion-row>
+										<ion-col class="check ion-padding">
+											<ion-checkbox formControlName="type" class="ion-margin-start"></ion-checkbox>
+											<ion-label class="ion-margin-start">Sou uma empresa prestadora de serviços de
+												automóveis.
+											</ion-label>
 										</ion-col>
 									</ion-row>
 									<ion-row>

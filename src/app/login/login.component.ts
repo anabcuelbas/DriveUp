@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
-import { Login } from '../models/login.model';
+import { Usuario } from '../models/usuario.model';
+import { LocalStorageService } from '../services/local-storage.service';
 import { ServicosService } from '../services/servicos.service';
 
 @Component({
@@ -13,7 +14,7 @@ import { ServicosService } from '../services/servicos.service';
 export class LoginComponent implements OnInit {
 	public form!: FormGroup;
 
-	constructor(private route: ActivatedRoute, private router: Router, private servicosService: ServicosService, private fb: FormBuilder, private alertController: AlertController) {}
+	constructor(private route: ActivatedRoute, private router: Router, private servicosService: ServicosService, private fb: FormBuilder, private alertController: AlertController, private localStorageService: LocalStorageService) {}
 
 	ngOnInit() {
 		this.mountForm();
@@ -23,6 +24,7 @@ export class LoginComponent implements OnInit {
 		this.form = this.fb.group({
 			email: ['', Validators.compose([Validators.required, Validators.email])],
 			password: ['', Validators.required],
+			type: [false, Validators.required],
 		});
 	}
 
@@ -33,19 +35,38 @@ export class LoginComponent implements OnInit {
 			return;
 		}
 
-		// checa login e se usuário é empresa ou não
-		// this.servicosService.checkLogin(login).subscribe((item) => {});
-		let resp: Login = this.servicosService.verifyLogin(this.form.get('email').value, this.form.get('password').value);
-
-		if (resp) {
-			if (resp.tipo == 'empresa') {
-				this.router.navigate(['/home']); //trocar para rota de home da empresa (não vamos fazer a página em si)
-			} else {
-				this.router.navigate(['/home']);
-			}
+		const email = this.form.get('email').value;
+		const password = this.form.get('password').value;
+		let type = '';
+		if (this.form.get('type').value == true) {
+			type = 'empresa';
 		} else {
-			this.presentAlert();
+			type = 'usuario';
 		}
+
+		this.servicosService.verifyLogin(type, email, password).subscribe(
+			(resp: any) => {
+				console.log('RESP: ', resp);
+				// let rows: Estabelecimento = {
+				// 	nome: 'Estabelecimento Teste',
+				// 	email: 'teste@teste.com',
+				// 	endereco: 'rua teste',
+				// 	horafuncionamento: '3h',
+				// 	diasfuncionamento: 'todo dia',
+				// 	img: 'https://teste',
+				// };
+				let rows: Usuario = {
+					nomeUsuario: 'Usuario Teste',
+					telefone: '123456',
+					email: 'teste@user.com',
+				};
+				this.localStorageService.createItem(rows, type);
+				this.router.navigate(['/home']);
+			},
+			(err) => {
+				this.presentAlert();
+			}
+		);
 	}
 
 	public async presentAlert() {
