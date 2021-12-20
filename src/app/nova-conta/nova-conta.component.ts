@@ -34,7 +34,7 @@ export class NovaContaComponent implements OnInit {
 				horafuncionamento: ['', Validators.required],
 				diasfuncionamento: ['', Validators.required],
 				endereco: ['', Validators.required],
-				img: ['', Validators.required],
+				img: [''],
 				emailEmpresa: ['', Validators.compose([Validators.required, Validators.email])],
 			}),
 			tipo: ['', Validators.required],
@@ -54,10 +54,12 @@ export class NovaContaComponent implements OnInit {
 			this.invalidPassword = true;
 			this.mountForm();
 		} else {
+			console.log('ENTROU NO CADASTRAR');
 			this.cadastro = this.form.value;
-			//chamar service para passar os dados de cadastro para o back
-			console.log('Cadastro: ', this.cadastro);
-			this.presentAlert();
+			this.service.cadastrarNovoUsuario(this.cadastro).subscribe((item) => {
+				console.log('Item: ', item);
+				this.presentAlert();
+			});
 		}
 	}
 
@@ -65,7 +67,7 @@ export class NovaContaComponent implements OnInit {
 		const alert = await this.alertController.create({
 			cssClass: 'alert',
 			header: 'Sucesso!',
-			message: 'Sua conta foi criada com sucesso :)',
+			message: 'Sua conta foi criada com sucesso :D',
 			buttons: ['OK'],
 		});
 

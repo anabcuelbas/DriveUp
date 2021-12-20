@@ -98,20 +98,20 @@
 									<ion-row>
 										<ion-col class="ion-padding">
 											<ion-text class="simple-text">Dias de funcionamento</ion-text>
-											<ion-input type="phone" formControlName="diasfuncionamento" [disabled]="!isEditing"></ion-input>
+											<ion-input type="phone" formControlName="diasFuncionamento" [disabled]="!isEditing"></ion-input>
 											<br>
 											<span class="error ion-padding"
-												[class.show]="form.get('diasfuncionamento')?.invalid && form.get('diasfuncionamento')?.touched">
+												[class.show]="form.get('diasFuncionamento')?.invalid && form.get('diasFuncionamento')?.touched">
 												Informe um período válido.
 											</span>
 										</ion-col>
 
 										<ion-col class="ion-padding">
 											<ion-text class="simple-text">Horário de funcionamento</ion-text>
-											<ion-input type="phone" formControlName="horafuncionamento" [disabled]="!isEditing"></ion-input>
+											<ion-input type="phone" formControlName="horaFuncionamento" [disabled]="!isEditing"></ion-input>
 											<br>
 											<span class="error ion-padding"
-												[class.show]="form.get('horafuncionamento')?.invalid && form.get('horafuncionamento')?.touched">
+												[class.show]="form.get('horaFuncionamento')?.invalid && form.get('horaFuncionamento')?.touched">
 												Informe um período válido.
 											</span>
 										</ion-col>

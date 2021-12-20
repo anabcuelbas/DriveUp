@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
-import { Usuario } from '../models/usuario.model';
 import { LocalStorageService } from '../services/local-storage.service';
 import { ServicosService } from '../services/servicos.service';
 
@@ -46,25 +45,17 @@ export class LoginComponent implements OnInit {
 
 		this.servicosService.verifyLogin(type, email, password).subscribe(
 			(resp: any) => {
-				console.log('RESP: ', resp);
-				// let rows: Estabelecimento = {
-				// 	nome: 'Estabelecimento Teste',
-				// 	email: 'teste@teste.com',
-				// 	endereco: 'rua teste',
-				// 	horafuncionamento: '3h',
-				// 	diasfuncionamento: 'todo dia',
-				// 	img: 'https://teste',
-				// };
-				let rows: Usuario = {
-					nomeUsuario: 'Usuario Teste',
-					telefone: '123456',
-					email: 'teste@user.com',
-				};
-				this.localStorageService.createItem(rows, type);
-				this.router.navigate(['/home']);
+				if (resp.rows.length == 0) {
+					this.presentAlert();
+					this.mountForm();
+				} else {
+					this.localStorageService.createItem(resp.rows[0], type);
+					this.router.navigate(['/home']);
+				}
 			},
 			(err) => {
 				this.presentAlert();
+				this.mountForm();
 			}
 		);
 	}

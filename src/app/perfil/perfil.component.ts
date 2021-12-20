@@ -13,10 +13,10 @@ import { ServicosService } from '../services/servicos.service';
 })
 export class PerfilComponent implements OnInit {
 	public form!: FormGroup;
-	public user: Usuario;
+	public user: Usuario = undefined;
 	public empresa: Estabelecimento;
 	public isEditing = false;
-	public localStorageResponse = this.localStorageService.getItem('usuario');
+	public localStorageResponse;
 
 	constructor(private fb: FormBuilder, private router: Router, private service: ServicosService, private localStorageService: LocalStorageService) {}
 
@@ -36,18 +36,21 @@ export class PerfilComponent implements OnInit {
 		this.form = this.fb.group({
 			nome: [this.empresa.nome, Validators.required],
 			email: [this.empresa.email, Validators.compose([Validators.required, Validators.email])],
-			horafuncionamento: [this.empresa.horafuncionamento, Validators.required],
-			diasfuncionamento: [this.empresa.diasfuncionamento, Validators.required],
+			horaFuncionamento: [this.empresa.horafuncionamento, Validators.required],
+			diasFuncionamento: [this.empresa.diasfuncionamento, Validators.required],
 			endereco: [this.empresa.endereco, Validators.required],
 			img: [this.empresa.img],
 		});
 	}
 
 	public getUserByID(): void {
+		this.localStorageResponse = this.localStorageService.getItem('usuario');
 		if (this.localStorageResponse?.type == 'usuario') {
 			this.user = this.localStorageResponse?.user;
+			this.user.nomeUsuario = this.localStorageResponse?.user.nomeusuario;
 			this.mountUserForm();
 		} else {
+			console.log(this.localStorageResponse?.user);
 			this.empresa = this.localStorageResponse?.user;
 			this.mountEmpresaForm();
 		}
@@ -70,24 +73,45 @@ export class PerfilComponent implements OnInit {
 			return;
 		}
 
-		this.user &&
+		if (this.user) {
+			const formularioUser = this.form.value;
 			this.service.updateUser(this.form.value).subscribe(
 				(item) => {
-					console.log('Update User: ', item);
+					this.user.nomeUsuario = formularioUser.nome;
+					this.user.email = formularioUser.email;
+					this.user.telefone = formularioUser.telefone;
+					this.localStorageService.createItem(this.user, 'usuario');
+					this.localStorageResponse = this.localStorageService.getItem('usuario');
+
+					this.mountUserForm();
 				},
 				(err) => {
 					console.log('ERRO: ', err);
 				}
 			);
-		this.empresa &&
+		}
+
+		if (this.empresa) {
+			const formulario = this.form.value;
 			this.service.updateEstabelecimento(this.form.value).subscribe(
 				(item) => {
-					console.log('Update Empresa: ', item);
+					this.empresa.nome = formulario.nome;
+					this.empresa.diasfuncionamento = formulario.diasFuncionamento;
+					this.empresa.email = formulario.email;
+					this.empresa.endereco = formulario.endereco;
+					this.empresa.horafuncionamento = formulario.horaFuncionamento;
+					this.empresa.img = formulario.img;
+
+					this.localStorageService.createItem(this.empresa, 'empresa');
+					this.localStorageResponse = this.localStorageService.getItem('usuario');
+
+					this.mountEmpresaForm();
 				},
 				(err) => {
 					console.log('ERRO: ', err);
 				}
 			);
+		}
 
 		this.editProfile();
 		this.user && this.mountUserForm();
@@ -95,6 +119,7 @@ export class PerfilComponent implements OnInit {
 	}
 
 	public logout() {
+		this.localStorageService.clearLocalStorage();
 		this.router.navigate(['/login']);
 	}
 }
