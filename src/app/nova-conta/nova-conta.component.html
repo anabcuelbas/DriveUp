@@ -9,10 +9,10 @@
 								<ion-grid>
 									<ion-row>
 										<ion-col class="ion-padding">
-											<ion-text class="secondary-text">Criar conta</ion-text>
+											<ion-text data-cy="title" class="secondary-text">Criar conta</ion-text>
 											<br><br><br><br>
 											<ion-text class="simple-text select">Selecione o tipo de usuário</ion-text>
-											<ion-select formControlName="tipo" (ionChange)="getType()">
+											<ion-select data-cy="select-type" formControlName="tipo" (ionChange)="getType()">
 												<ion-select-option value="empresa">Prestador de Serviço</ion-select-option>
 												<ion-select-option value="usuario">Contratador de Serviço
 												</ion-select-option>
@@ -24,7 +24,8 @@
 										</ion-col>
 									</ion-row>
 
-									<ng-container *ngIf="tipo == 'empresa'" formGroupName="empresa" class="empresa">
+									<ng-container data-cy="company-type" *ngIf="tipo == 'empresa'" formGroupName="empresa"
+										class="empresa">
 										<ion-row>
 											<ion-col class="ion-padding">
 												<ion-text class="simple-text">Nome</ion-text>
@@ -90,7 +91,7 @@
 										</ion-row>
 									</ng-container>
 
-									<ng-container *ngIf="tipo == 'usuario'" formGroupName="usuario">
+									<ng-container data-cy="user-type" *ngIf="tipo == 'usuario'" formGroupName="usuario">
 										<ion-row>
 											<ion-col class="ion-padding">
 												<ion-text class="simple-text">Nome</ion-text>
