@@ -25,7 +25,7 @@ const getUsuario = async (req, res) => {
         `;
     } else if (tipo == 'usuario') {
         query = `
-            SELECT id, nome AS nomeUsuario, email, telefone 
+            SELECT nome AS nomeUsuario, email, telefone 
             FROM usuario
             WHERE usuario.email IN (
                 SELECT perfil.email 
