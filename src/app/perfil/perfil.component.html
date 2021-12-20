@@ -1,4 +1,4 @@
-<app-header></app-header>
+<app-header data-cy="header"></app-header>
 <ion-content class="background">
 	<ion-grid *ngIf="user" class="user">
 		<ion-row class="padding-top ion-justify-content-center">
@@ -13,7 +13,7 @@
 											<ion-text class="secondary-text">Dados do perfil</ion-text>
 											<br><br><br><br>
 											<ion-text class="simple-text">Nome</ion-text>
-											<ion-input formControlName="nome" [disabled]="!isEditing"></ion-input>
+											<ion-input name="name" formControlName="nome" [disabled]="!isEditing"></ion-input>
 											<br>
 											<span class="error ion-padding"
 												[class.show]="form.get('nome')?.invalid && form.get('nome')?.touched">
@@ -24,7 +24,7 @@
 									<ion-row>
 										<ion-col class="ion-padding">
 											<ion-text class="simple-text">Email</ion-text>
-											<ion-input type="email" formControlName="email" disabled="true"></ion-input>
+											<ion-input name="email" type="email" formControlName="email" disabled="true"></ion-input>
 											<br>
 											<span class="error ion-padding"
 												[class.show]="form.get('email')?.invalid && form.get('email')?.touched">
@@ -35,7 +35,8 @@
 									<ion-row>
 										<ion-col class="ion-padding">
 											<ion-text class="simple-text">Telefone</ion-text>
-											<ion-input type="phone" formControlName="telefone" [disabled]="!isEditing"></ion-input>
+											<ion-input name="phone" type="phone" formControlName="telefone" [disabled]="!isEditing">
+											</ion-input>
 											<br>
 											<span class="error ion-padding"
 												[class.show]="form.get('telefone')?.invalid && form.get('telefone')?.touched">
@@ -45,13 +46,17 @@
 									</ion-row>
 									<ion-row>
 										<ion-col class="ion-padding">
-											<ion-button *ngIf="!isEditing" class="red ion-margin-bottom" (click)="editProfile()">Editar
+											<ion-button data-cy="edit-btn" *ngIf="!isEditing" class="red ion-margin-bottom"
+												(click)="editProfile()">Editar
 											</ion-button>
-											<ion-button *ngIf="!isEditing" class="black ion-margin-bottom" (click)="logout()">Sair
+											<ion-button data-cy="logout-btn" *ngIf="!isEditing" class="black ion-margin-bottom"
+												(click)="logout()">Sair
 											</ion-button>
-											<ion-button *ngIf="isEditing" class="green ion-margin-bottom" type="submit">Salvar
+											<ion-button data-cy="submit-btn" *ngIf="isEditing" class="green ion-margin-bottom" type="submit">
+												Salvar
 											</ion-button>
-											<ion-button *ngIf="isEditing" class="blue ion-margin-bottom" (click)="cancel()">Cancelar
+											<ion-button data-cy="cancel-btn" *ngIf="isEditing" class="blue ion-margin-bottom"
+												(click)="cancel()">Cancelar
 											</ion-button>
 										</ion-col>
 									</ion-row>

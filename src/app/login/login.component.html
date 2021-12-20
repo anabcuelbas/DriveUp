@@ -11,8 +11,8 @@
 										<ion-col class="ion-padding">
 											<ion-text class="secondary-text">Login</ion-text>
 											<br><br><br><br>
-											<ion-text class="simple-text">Email</ion-text>
-											<ion-input formControlName="email"></ion-input>
+											<ion-text data-cy="email" class="simple-text">Email</ion-text>
+											<ion-input data-cy="email-input" formControlName="email"></ion-input>
 											<br>
 											<span *ngIf="form.get('email')?.invalid && form.get('email')?.touched" class="error ion-padding"
 												[class.show]="form.get('email')?.invalid && form.get('email')?.touched">
@@ -22,8 +22,8 @@
 									</ion-row>
 									<ion-row>
 										<ion-col class="ion-padding">
-											<ion-text class="simple-text">Senha</ion-text>
-											<ion-input type="password" formControlName="password"></ion-input>
+											<ion-text data-cy="password" class="simple-text">Senha</ion-text>
+											<ion-input data-cy="password-input" type="password" formControlName="password"></ion-input>
 											<br>
 											<span *ngIf="form.get('password')?.invalid && form.get('password')?.touched"
 												class="error ion-padding"
@@ -34,15 +34,16 @@
 									</ion-row>
 									<ion-row>
 										<ion-col class="check ion-padding">
-											<ion-checkbox formControlName="type" class="ion-margin-start"></ion-checkbox>
-											<ion-label class="ion-margin-start">Sou uma empresa prestadora de serviços de
+											<ion-checkbox data-cy="checkbox" formControlName="type" class="ion-margin-start"></ion-checkbox>
+											<ion-label id="checkbox-label" class="ion-margin-start">Sou uma empresa prestadora de serviços de
 												automóveis.
 											</ion-label>
 										</ion-col>
 									</ion-row>
 									<ion-row>
 										<ion-col class="ion-padding">
-											<ion-button class="red ion-margin-bottom" type="submit">Entrar</ion-button>
+											<ion-button id="#submit-btn" data-cy="btn" class="red ion-margin-bottom" type="submit">Entrar
+											</ion-button>
 											<ion-text class="simple-text__nova-conta" routerLink='/login/create-account'>Não tem conta? Crie
 												uma
 											</ion-text>
