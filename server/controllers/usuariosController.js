@@ -45,10 +45,10 @@ const getUsuario = async (req, res) => {
 }
 
 const createUsuario = async (req, res) => {
-    let emailUsuario = req.body.usuario.email;
     let senha = req.body.senha;
     let tipo = req.body.tipo;
 
+    let emailUsuario = req.body.usuario.email;
     let telefone = req.body.usuario.telefone;
     let nomeUsuario = req.body.usuario.nomeUsuario;
 
@@ -57,7 +57,7 @@ const createUsuario = async (req, res) => {
     let hora = req.body.empresa.horafuncionamento;
     let dia = req.body.empresa.diasfuncionamento;
     let imagem = req.body.empresa.img;
-		let emailEmpresa = req.body.empresa.email;
+	let emailEmpresa = req.body.empresa.emailEmpresa;
 
     let query = ``;
 
