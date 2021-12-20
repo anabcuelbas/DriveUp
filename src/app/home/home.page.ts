@@ -4,7 +4,6 @@ import { MenuController } from '@ionic/angular';
 import SwiperCore, { Navigation } from 'swiper';
 import { Servico } from '../models/servico.model';
 import { ServicosService } from '../services/servicos.service';
-// install Swiper modules
 SwiperCore.use([Navigation]);
 
 @Component({
@@ -43,14 +42,4 @@ export class HomePage implements OnInit {
 			},
 		];
 	}
-
-	// proxPagina() {
-	//   this.servicos = [this.servico1, this.servico3, this.servico2];
-	// }
-	// antPagina() {
-	//   this.servicos = [this.servico3, this.servico3, this.servico3];
-	// }
-	// navigateForward() {
-	//   this.router.navigate([`lavagem`]);
-	// }
 }

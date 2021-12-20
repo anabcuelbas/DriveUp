@@ -54,10 +54,8 @@ export class NovaContaComponent implements OnInit {
 			this.invalidPassword = true;
 			this.mountForm();
 		} else {
-			console.log('ENTROU NO CADASTRAR');
 			this.cadastro = this.form.value;
 			this.service.cadastrarNovoUsuario(this.cadastro).subscribe((item) => {
-				console.log('Item: ', item);
 				this.presentAlert();
 			});
 		}

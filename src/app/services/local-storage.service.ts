@@ -20,7 +20,6 @@ export class LocalStorageService {
 	getItem(key: string) {
 		let item = localStorage.getItem(key);
 		if (item) {
-			console.log('Chamou aqui');
 			return JSON.parse(item);
 		}
 	}

@@ -128,9 +128,7 @@ export class AgendamentoPage implements OnInit {
 		this.agendamento.tipoVeiculo = this.form.get('veiculoTipo').value;
 
 		this.presentToast();
-		this.servicosService.addReservas(this.agendamento).subscribe((item) => {
-		 	//console.log(item);
-		});
+		this.servicosService.addReservas(this.agendamento).subscribe((item) => {});
 		this.router.navigate(['/home']);
 	}
 

@@ -35,10 +35,7 @@ export class LavagemPage implements OnInit {
 		});
 	}
 
-	ngOnInit(): void {
-		// this.servico = this.servicosService.getServicesByID(this.servicoId);
-		// console.log('Serviço selecionado: ', this.servico);
-	}
+	ngOnInit(): void {}
 
 	sideMenu() {
 		this.navigate = [
